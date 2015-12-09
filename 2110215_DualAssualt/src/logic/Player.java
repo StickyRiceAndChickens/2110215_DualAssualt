@@ -101,6 +101,12 @@ public class Player extends Human {
 		if(InputUtility.getKeyPressed(button[3])){
 			y+=1;
 		}
+		if(InputUtility.getKeyPressed(button[4])){
+			angle-=1;
+		}
+		else if(InputUtility.getKeyPressed(button[4])){
+			angle+=1;
+		}
 		
 	}
 

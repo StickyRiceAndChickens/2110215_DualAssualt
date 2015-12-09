@@ -1,7 +1,7 @@
-package input;
+package render;
 
 public class InputUtility {
-	//to check status of input
+
 	private static int mouseX, mouseY;
 	private static boolean mouseLeftDown, mouseRightDown, mouseOnScreen;
 	private static boolean mouseLeftTriggered, mouseRightTriggered;
@@ -103,7 +103,7 @@ public class InputUtility {
 	}
 
 	public static void postUpdate() {
-		/* setting before update */
+		
 		mouseLeftTriggered=false;
 		mouseRightTriggered=false;
 		for (int i = 0; i < 256; i++) {
@@ -113,4 +113,3 @@ public class InputUtility {
 		
 	}
 }
-
