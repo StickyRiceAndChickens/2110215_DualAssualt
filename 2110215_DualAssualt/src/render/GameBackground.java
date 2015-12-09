@@ -3,12 +3,11 @@ package render;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import lib.ConfigurableOption;
-import lib.IRenderableObject;
 
 
 
-public class GameBackground implements IRenderableObject{
+
+public class GameBackground implements IRenderable{
 
 	private BufferedImage bgImage = null;
 	private int currentX = 0;
@@ -42,24 +41,26 @@ public class GameBackground implements IRenderableObject{
 		return Integer.MIN_VALUE;
 	}
 
+	
+
 	@Override
-	public void render(Graphics2D g2) {
+	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
 		if(bgImage == null) return;
 		int currentDrawingX = 0;
 		int currentDrawingY = 0;
 		
-		while(currentDrawingY < ConfigurableOption.screenHeight){
-			g2.drawImage(bgImage.getSubimage(currentX, 0, imageWidth-currentX, bgImage.getHeight()),
+		while(currentDrawingY < SettingScreen.screenHeight){
+			g2d.drawImage(bgImage.getSubimage(currentX, 0, imageWidth-currentX, bgImage.getHeight()),
 					null, currentDrawingX, currentDrawingY);
 			currentDrawingY += bgImage.getHeight();
 		}
 		currentDrawingX += imageWidth - currentX;
 		currentDrawingY = 0;
 		
-		while(currentDrawingX < ConfigurableOption.screenWidth){
-			while(currentDrawingY < ConfigurableOption.screenHeight){
-				g2.drawImage(bgImage, null, currentDrawingX, currentDrawingY);
+		while(currentDrawingX < SettingScreen.screenWidth){
+			while(currentDrawingY < SettingScreen.screenHeight){
+				g2d.drawImage(bgImage, null, currentDrawingX, currentDrawingY);
 				currentDrawingY += bgImage.getHeight();
 			}
 			currentDrawingX += imageWidth;
