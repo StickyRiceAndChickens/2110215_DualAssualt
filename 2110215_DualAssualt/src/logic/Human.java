@@ -2,17 +2,16 @@ package logic;
 
 import render.IRenderable;
 
-public abstract class Human implements IRenderable{
+public abstract class Human extends Entity implements IRenderable{
+	
 	protected int life;
-	protected int x,y;
-	protected int radius;
 	protected int angle;
 	protected Weapon weapon;
 	
 	protected boolean isdead=false;
 	
 	public Human(int life, int x, int y,int radius, int angle, Weapon weapon) {
-		super();
+		super(x, y,radius);
 		this.life = life;
 		this.x = x;
 		this.y = y;

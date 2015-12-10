@@ -1,39 +1,25 @@
 package logic;
 
-import java.awt.Graphics2D;
-
-import render.IRenderable;
-
-public class Weapon implements IRenderable {
+public abstract class Weapon extends Entity{
 	
-	protected int x,y;
+	
 	protected int angle;
 	protected int power;
 	protected int speed;
 	
-	public void attack() {
-		// TODO Auto-generated method stub
+	
+	public Weapon(int x, int y, int radius,int angle, int power, int speed) {
+		super(x,y,radius);
 		
+		this.angle = angle;
+		this.power = power;
+		this.speed = speed;
 	}
-	public boolean isHit(){
-		
-	}
-	@Override
-	public int getZ() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
+	public abstract void attack();
+	public abstract boolean isHit(Entity e);
 
-	@Override
-	public void draw(Graphics2D g2d) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isVisible() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
+	
 
 }
