@@ -30,8 +30,9 @@ public class GameTitle extends JPanel {
 				
 			}
 		});
-		JButton howToPlayButton = new JButton("How to Play");
-		howToPlayButton.addActionListener(new ActionListener() {
+		JButton SettingButton = new JButton("How to Play");
+	
+		SettingButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -40,7 +41,7 @@ public class GameTitle extends JPanel {
 			}
 		});
 		centerPanel.add(playButton);
-		centerPanel.add(howToPlayButton);
+		centerPanel.add(SettingButton);
 		this.add(centerPanel, BorderLayout.CENTER);
 	}
 }

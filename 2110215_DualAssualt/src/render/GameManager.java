@@ -16,6 +16,8 @@ public class GameManager {
 	private static GameTitle titleScene;
 	private static GameScreen gameScreen;
 	private static GameWindow gameWindow;
+	private static SettingScreen settingScreen;
+	private static PlayerMenuScreen playerMenuScreen;
 	private static JPanel nextScene = null;
 	
 	public static void runGame(GameLogic gameLogic){
@@ -32,6 +34,7 @@ public class GameManager {
 //				}
 //			});
 //		}
+		gameScreen = new GameScreen();
 		
 		gameWindow = new GameWindow(titleScene);
 		
@@ -64,10 +67,16 @@ public class GameManager {
 	public static void newGame(){
 		nextScene = gameScreen;
 	}
+	public static void goToSetting(){
+		nextScene = settingScreen;
+	}
+	public static void goToPlayerMenu(){
+		nextScene = playerMenuScreen;
+	}
 	
 	public static void resizeScreen(){
 		gameScreen.applyResize();
-		gameWindow.setSize(ConfigurableOption.screenWidth, ConfigurableOption.screenHeight);
+		gameWindow.setSize(SettingScreen.screenWidth, SettingScreen.screenHeight);
 		titleScene.validate();
 	}
 }

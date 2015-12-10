@@ -12,7 +12,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
-import input.InputUtility;
+
 
 
 
@@ -20,9 +20,9 @@ public class GameScreen extends JPanel {
 
 	private RenderableHolder renderableHolder;
 
-	protected GameScreen(RenderableHolder holder) {
+	protected GameScreen() {
 		/* fill code */
-		this.renderableHolder=holder;
+		
 		this.applyResize();
 		this.addListener();
 		this.validate();
@@ -45,7 +45,7 @@ public class GameScreen extends JPanel {
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					// label.setText("Detected Mouse Left Click!");
 					InputUtility.setMouseLeftDown(true);
-					InputUtility.setMouseLeftLastDown(true);
+					InputUtility.setMouseLeftTriggered(true);
 				} else if (e.getButton() == MouseEvent.BUTTON3) {
 					// label.setText("Detected Mouse Right Click!");
 				}

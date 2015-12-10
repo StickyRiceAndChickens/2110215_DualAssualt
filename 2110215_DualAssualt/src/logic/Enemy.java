@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 public class Enemy extends Human {
 
+	
 	public Enemy(int life, int x, int y, int radius, int angle, Weapon weapon) {
 		super(life, x, y, radius, angle, weapon);
 		// TODO Auto-generated constructor stub
