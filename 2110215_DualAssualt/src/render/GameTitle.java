@@ -60,3 +60,4 @@ public class QuitPanel extends JPanel {
 	}
 	
 }
+

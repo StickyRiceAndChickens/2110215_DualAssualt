@@ -4,7 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import input.InputUtility;
+import render.InputUtility;
+
+
 
 public class Player extends Human {
 
@@ -19,13 +21,9 @@ public class Player extends Human {
 		// TODO Auto-generated constructor stub
 		this.name = name;
 		this.playerID = playerID;
-		if (this.name.equals(null)) {
-			this.name = playerID + "P";
-		}
 		this.button = new int[7];
 		defualtButton(playerID);
 		this.image = image;
-
 	}
 
 	public String getName() {
@@ -104,7 +102,7 @@ public class Player extends Human {
 		if(InputUtility.getKeyPressed(button[4])){
 			angle-=1;
 		}
-		else if(InputUtility.getKeyPressed(button[4])){
+		else if(InputUtility.getKeyPressed(button[6])){
 			angle+=1;
 		}
 		
@@ -113,13 +111,16 @@ public class Player extends Human {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+		move();
+		attack();
 	}
 
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
-		
+		if(InputUtility.getKeyTriggered(button[5])){
+			weapon.attack();
+		}
 	}
 	
 	

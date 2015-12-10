@@ -23,5 +23,5 @@ public class DrawingUtility {
 
 	}
 	/*install image*/
-	protected static final BufferedImage bg = getImage("res/img/bg.jpg");
+	protected static final BufferedImage bg = getImage("res/img/bgTitle.jpg");
 }

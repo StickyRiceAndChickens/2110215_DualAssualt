@@ -1,6 +1,8 @@
 package render;
 
-public class SettingScreen {
+import javax.swing.JPanel;
+
+public class SettingScreen extends JPanel{
 
 	public static int screenHeight;
 	public static int screenWidth;
