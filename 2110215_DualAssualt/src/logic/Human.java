@@ -74,9 +74,7 @@ public abstract class Human extends Entity implements IRenderable{
 	}
 	
 	public abstract void move();
-	public void attack(){
-		this.weapon.attack();
-	}
+	public abstract void attack();
 	public abstract void update();
 	
 	

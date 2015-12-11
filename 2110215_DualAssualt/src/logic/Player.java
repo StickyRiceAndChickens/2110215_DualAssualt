@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import render.InputUtility;
+import render.RenderableHolder;
 
 
 
@@ -36,6 +37,9 @@ public class Player extends Human {
 
 	public int[] getButton() {
 		return button;
+	}
+	public int getButton(int b){
+		return button[b];
 	}
 
 	public void setButton(int id, int button) {
@@ -120,6 +124,7 @@ public class Player extends Human {
 		// TODO Auto-generated method stub
 		if(InputUtility.getKeyTriggered(button[5])){
 			weapon.attack();
+			
 		}
 	}
 	

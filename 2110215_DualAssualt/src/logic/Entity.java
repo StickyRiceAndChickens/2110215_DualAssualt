@@ -27,4 +27,6 @@ public abstract class Entity {
 		this.y = y;
 	}
 	
+	public abstract void update();
+	
 }

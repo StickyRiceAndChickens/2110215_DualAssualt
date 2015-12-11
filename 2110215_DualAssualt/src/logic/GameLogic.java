@@ -16,7 +16,7 @@ public class GameLogic  {
 
 	// All renderable objects
 	private GameBackground background;
-	
+	Player p1;
 	
 
 	/*
@@ -31,7 +31,8 @@ public class GameLogic  {
 	// Called before enter the game loop
 	public synchronized void onStart() {
 		background = new GameBackground();
-		
+		Gun gun1 = new Gun(100, 100, 10, 0, p1, 1);
+		p1= new Player(50, 100, 100, 10, 0, gun1, "BF", 0, playerImage);
 		
 		
 		readyToRender = true;
