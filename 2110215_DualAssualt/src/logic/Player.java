@@ -2,12 +2,11 @@ package logic;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import render.InputUtility;
-import render.RenderableHolder;
-
-
+import render.SettingScreen;
 
 public class Player extends Human {
 
@@ -25,6 +24,7 @@ public class Player extends Human {
 		this.button = new int[7];
 		defualtButton(playerID);
 		this.image = image;
+		System.out.print(button[0]);
 	}
 
 	public String getName() {
@@ -38,7 +38,8 @@ public class Player extends Human {
 	public int[] getButton() {
 		return button;
 	}
-	public int getButton(int b){
+
+	public int getButton(int b) {
 		return button[b];
 	}
 
@@ -79,37 +80,52 @@ public class Player extends Human {
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
-		return isDead();
+		return !isDead();
 	}
 
 	@Override
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
-		g2d.drawImage(image, null, x - radius, y - radius);
+		AffineTransform at = new AffineTransform();
+
+		// 4. translate it to the center of the component
+		at.translate(x-radius, y-radius);
+
+		// 3. do the actual rotation
+		at.rotate(Math.toRadians(angle));
+
+		// 2. just a scale because this image is big
+		at.scale(0.5, 0.5);
+
+		// 1. translate the object so that you rotate it around the
+		// center (easier :))
+		at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
+		g2d.drawImage(image, at, null);
+
 	}
 
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		if(InputUtility.getKeyPressed(button[0])){
-			x-=1;
+		if (InputUtility.getKeyPressed(button[0])) {
+			System.out.print("move");
+			y -= 1;
 		}
-		if(InputUtility.getKeyPressed(button[1])){
-			y-=1;
+		if (InputUtility.getKeyPressed(button[1])) {
+			x -= 1;
 		}
-		if(InputUtility.getKeyPressed(button[2])){
-			x+=1;
+		if (InputUtility.getKeyPressed(button[2])) {
+			y += 1;
 		}
-		if(InputUtility.getKeyPressed(button[3])){
-			y+=1;
+		if (InputUtility.getKeyPressed(button[3])) {
+			x += 1;
 		}
-		if(InputUtility.getKeyPressed(button[4])){
-			angle-=1;
+		if (InputUtility.getKeyPressed(button[4])) {
+			angle -= 1;
+		} else if (InputUtility.getKeyPressed(button[6])) {
+			angle += 1;
 		}
-		else if(InputUtility.getKeyPressed(button[6])){
-			angle+=1;
-		}
-		
+
 	}
 
 	@Override
@@ -122,12 +138,10 @@ public class Player extends Human {
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
-		if(InputUtility.getKeyTriggered(button[5])){
+		if (InputUtility.getKeyPressed(button[5])) {
 			weapon.attack();
-			
+			System.out.print("use");
 		}
 	}
-	
-	
 
 }

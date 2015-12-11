@@ -110,6 +110,7 @@ public class GameScreen extends JPanel {
 				// TODO Auto-generated method stub
 				InputUtility.setKeyPressed(e.getKeyCode(), true);
 				InputUtility.setKeyTriggered(e.getKeyCode(), true);
+				
 			}
 		});
 	}
@@ -118,17 +119,18 @@ public class GameScreen extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 		Graphics2D g2 = (Graphics2D) g;
-
+		
 		// assign the background color to be "black"
-		g2.setBackground(Color.BLACK);
+		g2.setBackground(Color.white);
 
 		// clear all the objects
 		Dimension dim = getSize();
 		g2.clearRect(0, 0, (int) dim.getWidth(), (int) dim.getHeight());
 
-		// reder all the objects
+		// render all the objects
 		for (IRenderable renderable :RenderableHolder.getInstance().getRenderableList()) {
 			renderable.draw(g2);
+			
 		}
 	}
 

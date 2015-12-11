@@ -1,6 +1,10 @@
 package logic;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import render.InputUtility;
+import render.RenderableHolder;
 
 public class Gun extends Weapon {
 
@@ -14,6 +18,7 @@ public class Gun extends Weapon {
 	private int power;
 	private int reloadingTime;
 	private int reloadingCount;
+	
 
 	public Gun(int x, int y, int radius, int angle, Human shooter, int gunType) {
 		super(x, y, radius, angle);
@@ -41,6 +46,10 @@ public class Gun extends Weapon {
 		this.reloadingTime = 0;
 		this.defaultMagazine = magazine;
 
+	}
+
+	public void setShooter(Human shooter) {
+		this.shooter = shooter;
 	}
 
 	public int getAmmo() {
@@ -134,6 +143,7 @@ public class Gun extends Weapon {
 	@Override
 	public void attack() {
 		// add new Bullet
+		System.out.print("Gun");
 		if (hasAmmo()) {
 			if (hasMagazine()) {
 				reloadingCount=0;
@@ -143,13 +153,23 @@ public class Gun extends Weapon {
 				}
 				switch (gunType) {
 				case 0:
-					new Bullet(x, y, angle - 1, power, 3, shooter);
-					new Bullet(x, y, angle, power, 3, shooter);
-					new Bullet(x, y, angle + 1, power, 3, shooter);
+					Bullet bullet = new Bullet(x, y, angle - 1, power, 3, shooter);
+					
+					RenderableHolder.getInstance().add(bullet);
+					bullet = new Bullet(x, y, angle, power, 3, shooter);
+					GameLogic.addEntity(bullet);
+					RenderableHolder.getInstance().add(bullet);
+					bullet = new Bullet(x, y, angle+1, power, 3, shooter);
+					GameLogic.addEntity(bullet);
+					RenderableHolder.getInstance().add(bullet);
+					System.out.println("shoot");
 					break;
 
 				default:
-					new Bullet(x, y, angle, power, 4, shooter);
+					bullet = new Bullet(x, y, angle, power, 4, shooter);
+					GameLogic.addEntity(bullet);
+					RenderableHolder.getInstance().add(bullet);
+					System.out.println("shoot");
 					break;
 				}
 				fireRateCount += 10;
@@ -169,6 +189,7 @@ public class Gun extends Weapon {
 	public void update() {
 		// TODO Auto-generated method stub
 		move();
+		
 	}
 
 }

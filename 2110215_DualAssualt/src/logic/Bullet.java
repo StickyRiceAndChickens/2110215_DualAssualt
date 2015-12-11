@@ -7,7 +7,7 @@ import render.IRenderable;
 
 public class Bullet extends Weapon implements IRenderable {
 
-	private boolean isDestroyed = false;
+	protected boolean isDestroyed = false;
 	private Human shooter;
 	private int power;
 	private int speed;
@@ -24,21 +24,26 @@ public class Bullet extends Weapon implements IRenderable {
 	public void move() {
 		// TODO Auto-generated method stub
 		if (!isDestroyed) {
-			x = x + speed * (int) Math.cos(angle);
-			y = y + speed * (int) Math.sin(angle);
+			x = (int) (x + (double) speed * Math.cos(angle));
+			y = (int) (y + (double) speed * Math.sin(angle));
+
 		}
 	}
 
-	public boolean isHit(Entity e) {
+	public boolean isHit() {
 		// TODO Auto-generated method stub
-		if (e != shooter) {
-			if (Math.hypot(this.x - e.x, this.y - e.y) <= this.radius + e.radius) {
+		for (Entity e : GameLogic.getEntities()) {
+			if (e != shooter && e != shooter.getWeapon()) {
+				if (!(e instanceof Bullet)) {
+					if (Math.hypot(this.x - e.x, this.y - e.y) <= this.radius + e.radius) {
 
-				this.isDestroyed = true;
-				if (e instanceof Human) {
-					((Human) e).deceaseLife(power);
+						this.isDestroyed = true;
+						if (e instanceof Human) {
+							((Human) e).deceaseLife(power);
+						}
+						return true;
+					}
 				}
-				return true;
 			}
 		}
 		return false;
@@ -55,7 +60,7 @@ public class Bullet extends Weapon implements IRenderable {
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
 		g2d.setColor(Color.black);
-		g2d.fillOval(x - 1, y - 1, 2, 2);
+		g2d.fillOval(x - 5, y - 5, 10, 10);
 	}
 
 	@Override
