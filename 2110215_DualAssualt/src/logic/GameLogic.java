@@ -66,7 +66,7 @@ public class GameLogic {
 		// Paused
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
 			/* fill code1 */
-
+			System.out.println("Enter");
 		}
 
 		// Update moving background

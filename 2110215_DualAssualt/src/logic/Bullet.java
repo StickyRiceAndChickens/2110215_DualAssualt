@@ -24,8 +24,8 @@ public class Bullet extends Weapon implements IRenderable {
 	public void move() {
 		// TODO Auto-generated method stub
 		if (!isDestroyed) {
-			x = (int) (x + (double) speed * Math.cos(angle));
-			y = (int) (y + (double) speed * Math.sin(angle));
+			x = (int) (x + (double) speed * Math.cos(Math.toRadians(angle)));
+			y = (int) (y + (double) speed * Math.sin(Math.toRadians(angle)));
 
 		}
 	}
@@ -73,6 +73,7 @@ public class Bullet extends Weapon implements IRenderable {
 	public void update() {
 		// TODO Auto-generated method stub
 		move();
+		isHit();
 	}
 
 	@Override

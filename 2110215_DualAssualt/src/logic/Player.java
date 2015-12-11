@@ -80,7 +80,7 @@ public class Player extends Human {
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
-		return !isDead();
+		return !isDead;
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class Player extends Human {
 	public void move() {
 		// TODO Auto-generated method stub
 		if (InputUtility.getKeyPressed(button[0])) {
-			System.out.print("move");
+			
 			y -= 1;
 		}
 		if (InputUtility.getKeyPressed(button[1])) {
@@ -122,8 +122,10 @@ public class Player extends Human {
 		}
 		if (InputUtility.getKeyPressed(button[4])) {
 			angle -= 1;
+			if(angle<0)angle=360;
 		} else if (InputUtility.getKeyPressed(button[6])) {
 			angle += 1;
+			if(angle>360)angle=0;
 		}
 
 	}
@@ -133,6 +135,7 @@ public class Player extends Human {
 		// TODO Auto-generated method stub
 		move();
 		attack();
+		
 	}
 
 	@Override
@@ -140,7 +143,7 @@ public class Player extends Human {
 		// TODO Auto-generated method stub
 		if (InputUtility.getKeyPressed(button[5])) {
 			weapon.attack();
-			System.out.print("use");
+			//System.out.print("use");
 		}
 	}
 

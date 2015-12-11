@@ -24,5 +24,5 @@ public class DrawingUtility {
 	}
 	/*install image*/
 	protected static final BufferedImage bg = getImage("res/img/bgTitle.jpg");
-	public static final BufferedImage playerImage = getImage("res/img/tutorial_sample31d.jpg");
+	public static final BufferedImage playerImage = getImage("res/img/charingame3.png");
 }

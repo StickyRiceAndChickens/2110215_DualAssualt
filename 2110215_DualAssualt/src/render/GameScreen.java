@@ -129,6 +129,7 @@ public class GameScreen extends JPanel {
 
 		// render all the objects
 		for (IRenderable renderable :RenderableHolder.getInstance().getRenderableList()) {
+			if(renderable.isVisible())
 			renderable.draw(g2);
 			
 		}

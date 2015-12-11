@@ -4,8 +4,8 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class SettingScreen extends JPanel{
-
-	public static int screenHeight=800;
-	public static int screenWidth=600;
-
+	
+	public static int screenWidth=1200;
+	public static int screenHeight=400;
+	
 }
