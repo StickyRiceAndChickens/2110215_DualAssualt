@@ -29,6 +29,7 @@ public class GameTitle extends JPanel {
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 		this.setLayout(new BorderLayout());
 		JPanel westPanel = new JPanel();
+		westPanel.setBackground(Color.DARK_GRAY);
 		westPanel.setLayout(new GridLayout(6,1));
 		
 		westPanel.setPreferredSize(new Dimension(300, 500));
