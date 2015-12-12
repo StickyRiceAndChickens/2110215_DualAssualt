@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -24,7 +25,7 @@ import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
 public class GameTitle extends JPanel {
-	GameBackground background;
+	TitleBackground background;
 	public GameTitle() {
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 		this.setLayout(new BorderLayout());
@@ -41,7 +42,7 @@ public class GameTitle extends JPanel {
 		westPanel.add(emptyPanel2);
 		westPanel.add(emptyPanel3);
 		
-		 background= new GameBackground();
+		background= new TitleBackground();
 		
 		NewGamePanel newGamePanel = new NewGamePanel();
 		newGamePanel.addMouseListener(new MouseListener() {
@@ -107,7 +108,7 @@ public class GameTitle extends JPanel {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setBackground(Color.BLUE);
 			g2d.clearRect(0, 0, getWidth(), getHeight());
-			g2d.drawImage(DrawingUtility.getImage("res/img/bgEmptyPanel1.png"), null, 0, 0);
+			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.getImage("res/img/bgEmptyPanel1.png"), 2), null, 0, 0);
 		}
 	}
 	public class EmptyPanel2 extends JPanel {
@@ -123,7 +124,7 @@ public class GameTitle extends JPanel {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setBackground(Color.BLACK);
 			g2d.clearRect(0, 0, getWidth(), getHeight());
-			g2d.drawImage(DrawingUtility.getImage("res/img/bgEmptyPanel2.png"), null, 0, 0);
+			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.getImage("res/img/bgEmptyPanel2.png"), 2), null, 0, 0);
 		}
 	}
 	public class EmptyPanel3 extends JPanel {
@@ -139,7 +140,7 @@ public class GameTitle extends JPanel {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setBackground(Color.BLUE);
 			g2d.clearRect(0, 0, getWidth(), getHeight());
-			g2d.drawImage(DrawingUtility.getImage("res/img/bgEmptyPanel3.png"), null, 0, 0);
+			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.getImage("res/img/bgEmptyPanel3.png"), 2), null, 0, 0);
 		}
 	}
 	
@@ -157,8 +158,8 @@ public class GameTitle extends JPanel {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setBackground(Color.GREEN);
 			g2d.clearRect(0, 0, getWidth(), getHeight());
-			g2d.drawImage(DrawingUtility.getImage("res/img/bgNewGame.png"), null, 0, 0);
-			g2d.drawImage(DrawingUtility.getImage("res/img/buttonNewGame.png"), null, 0, 0);
+			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.getImage("res/img/bgNewGame.png"), 2), null, 0, 0);
+			g2d.drawImage(DrawingUtility.resizeButton(DrawingUtility.getImage("res/img/buttonNewGame.png"), 2), null, 40, 40);
 		}
 	}
 
@@ -170,8 +171,8 @@ public class GameTitle extends JPanel {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setBackground(Color.YELLOW);
 			g2d.clearRect(0, 0, getWidth(), getHeight());
-			g2d.drawImage(DrawingUtility.getImage("res/img/bgSetting.png"), null, 0, 0);
-			g2d.drawImage(DrawingUtility.getImage("res/img/buttonSetting.png"), null, 0, 0);
+			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.getImage("res/img/bgSetting.png"), 2), null, 0, 0);
+			g2d.drawImage(DrawingUtility.resizeButton(DrawingUtility.getImage("res/img/buttonSetting.png"), 2), null, 40, 20);
 		}
 	}
 
@@ -183,8 +184,8 @@ public class GameTitle extends JPanel {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setBackground(Color.RED);
 			g2d.clearRect(0, 0, getWidth(), getHeight());
-			g2d.drawImage(DrawingUtility.getImage("res/img/bgQuit.png"), null, 0, 0);
-			g2d.drawImage(DrawingUtility.getImage("res/img/buttonQuit.png"), null, 0, 0);
+			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.getImage("res/img/bgQuit.png"), 2), null, 0, 0);
+			g2d.drawImage(DrawingUtility.resizeButton(DrawingUtility.getImage("res/img/buttonQuit.png"), 2), null, 40, 0);
 		}
 	}
 
@@ -209,6 +210,6 @@ public class GameTitle extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		
-		background.draw(g2d);;
+		background.draw(g2d);
 	}
 }
