@@ -32,6 +32,7 @@ public class Bullet extends Weapon implements IRenderable {
 
 	public boolean isHit() {
 		// TODO Auto-generated method stub
+		if(!this.isDestroyed)
 		for (Entity e : GameLogic.getEntities()) {
 			if (e != shooter && e != shooter.getWeapon()) {
 				if (!(e instanceof Bullet)) {

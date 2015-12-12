@@ -8,9 +8,11 @@ public class GameWindow extends JFrame{
 	private JPanel currentScene;
 	
 	protected GameWindow(JPanel scene){
-		super("Shoot the bullet");
+		super("Dual Assualt");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		//this.setUndecorated(true);
+		
 		this.currentScene = scene;
 		getContentPane().add(currentScene);
 		pack();
@@ -24,10 +26,12 @@ public class GameWindow extends JFrame{
 		getContentPane().add(currentScene);
 		getContentPane().validate();
 		pack();
+		
 		currentScene.requestFocus();
 	}
 	
 	protected JPanel getCurrentScene(){
 		return currentScene;
 	}
+	
 }

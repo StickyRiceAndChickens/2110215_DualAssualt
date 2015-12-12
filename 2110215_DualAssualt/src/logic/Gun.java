@@ -21,7 +21,7 @@ public class Gun extends Weapon {
 	private int reloadingCount;
 
 	public Gun(int x, int y, int radius, int angle, Human shooter, int gunType) {
-		super(x-10, y-10, radius, angle);
+		super(x, y, radius, angle);
 		// TODO Auto-generated constructor stub
 		this.gunType = gunType;
 		switch (gunType) {
@@ -30,7 +30,7 @@ public class Gun extends Weapon {
 			this.magazine = 8;
 			this.ammo = 42;
 			this.power = 10;
-			this.reloadingTime = 5;
+			this.reloadingTime = 30;
 			break;
 		case 1:
 			this.fireRate = 50;
@@ -40,7 +40,7 @@ public class Gun extends Weapon {
 			this.reloadingTime = 10;
 			break;
 		}
-		this.fireRateDelay=60-fireRate;
+		this.fireRateDelay = 60 - fireRate;
 		this.shooter = shooter;
 		this.fireRateCount = 0;
 		this.reloadingTime = 0;
@@ -135,55 +135,40 @@ public class Gun extends Weapon {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		x = shooter.getX()-10;
-		y = shooter.getY()-10;
+		x = shooter.getX();
+		y = shooter.getY();
 		angle = shooter.getAngle();
 	}
 
 	@Override
 	public void attack() {
 		// add new Bullet
-		
-		//if (hasAmmo()) {
-//			if (hasMagazine()) {
+
+		if (hasAmmo()) {
+			if (hasMagazine()) {
 				reloadingCount = 0;
 				if (fireRateCount < fireRateDelay) {
 					return;
-					
-				}
-					
-				switch (gunType) {
-				case 0:
-					Bullet bullet = new Bullet(x, y, angle - 1, power, 3, shooter);
 
-					RenderableHolder.getInstance().add(bullet);
-					bullet = new Bullet(x, y, angle, power, 3, shooter);
-					GameLogic.addEntity(bullet);
-					RenderableHolder.getInstance().add(bullet);
-					bullet = new Bullet(x, y, angle + 1, power, 3, shooter);
-					GameLogic.addEntity(bullet);
-					RenderableHolder.getInstance().add(bullet);
-					System.out.println("shoot");
-					break;
-
-				default:
-					bullet = new Bullet(x, y, angle, power, 4, shooter);
-					GameLogic.addEntity(bullet);
-					RenderableHolder.getInstance().add(bullet);
-					break;
 				}
-				fireRateCount=0;
-				magazine--;
-				ammo--;
-				hasAmmo();
-				hasMagazine();
-//			} else {
-//				fireRateCount = 0;
-//				while (reload() || InputUtility.getKeyTriggered(((Player) shooter).getButton(5)))
-//					;
-//			}
-		//}
+
+				Bullet bullet = new Bullet(x, y, angle, power, 4, shooter);
+				GameLogic.addEntity(bullet);
+				RenderableHolder.getInstance().add(bullet);
+				
+			}
+			fireRateCount = 0;
+			magazine--;
+			ammo--;
+			hasAmmo();
+			hasMagazine();
+		} else {
+			fireRateCount = 0;
+			while (reload() || InputUtility.getKeyTriggered(((Player) shooter).getButton(5)))
+				;
+		}
 	}
+
 
 	@Override
 	public void update() {

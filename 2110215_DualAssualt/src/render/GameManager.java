@@ -75,7 +75,6 @@ public class GameManager {
 	}
 	
 	public static void resizeScreen(){
-		gameScreen.applyResize();
 		gameWindow.setSize(SettingScreen.screenWidth, SettingScreen.screenHeight);
 		titleScene.validate();
 	}

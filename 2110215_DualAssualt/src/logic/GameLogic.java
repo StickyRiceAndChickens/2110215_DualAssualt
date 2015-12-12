@@ -18,8 +18,8 @@ public class GameLogic {
 
 	// All renderable objects
 	private GameBackground background;
-	Player p1,p2;
-	Gun gun1,gun2;
+	private Player p1,p2;
+	private Gun gun1,gun2;
 	private static List<Entity> entities = new CopyOnWriteArrayList<Entity>();
 
 	public static void addEntity(Entity e) {
@@ -53,6 +53,8 @@ public class GameLogic {
 		entities.add(p2);
 		entities.add(gun2);
 		RenderableHolder.getInstance().add(p2);
+		GameStatusBar status=new GameStatusBar(p1, p2);
+		RenderableHolder.getInstance().add(status);
 		readyToRender = true;
 	}
 

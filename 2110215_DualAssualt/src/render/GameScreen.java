@@ -139,7 +139,6 @@ public class GameScreen extends JPanel {
 	 * 
 	 */
 	protected void applyResize() {
-		/* fill code */
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 	}
 }

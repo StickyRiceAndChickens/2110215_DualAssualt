@@ -89,7 +89,7 @@ public class Player extends Human {
 		AffineTransform at = new AffineTransform();
 
 		// 4. translate it to the center of the component
-		at.translate(x-radius, y-radius);
+		at.translate(x, y);
 
 		// 3. do the actual rotation
 		at.rotate(Math.toRadians(angle));
