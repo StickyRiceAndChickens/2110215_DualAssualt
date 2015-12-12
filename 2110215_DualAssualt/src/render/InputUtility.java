@@ -1,5 +1,7 @@
 package render;
 
+import java.awt.event.KeyEvent;
+
 public class InputUtility {
 
 	private static int mouseX, mouseY;
@@ -78,6 +80,7 @@ public class InputUtility {
 	public static boolean getKeyPressed(int key) {
 		if (key < 0 || key > 255)
 			return false;
+		
 		return keyPressed[key];
 	}
 

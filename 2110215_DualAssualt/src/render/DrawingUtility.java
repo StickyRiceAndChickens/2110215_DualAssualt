@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 
 public class DrawingUtility {
-	private static BufferedImage getImage(String directory) {
+	static BufferedImage getImage(String directory) {
 		/* try to load image */
 		ClassLoader loader = DrawingUtility.class.getClassLoader();
 		BufferedImage image;
@@ -24,5 +24,5 @@ public class DrawingUtility {
 	}
 	/*install image*/
 	protected static final BufferedImage bg = getImage("res/img/bgTitle.jpg");
-	protected static final BufferedImage playerImage = getImage("res/img/tutorial_sample31d.jpg");
+	public static final BufferedImage playerImage = getImage("res/img/charingame3.png");
 }

@@ -1,6 +1,10 @@
 package logic;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import render.InputUtility;
+import render.RenderableHolder;
 
 public class Gun extends Weapon {
 
@@ -8,6 +12,7 @@ public class Gun extends Weapon {
 	private int gunType;
 	private int fireRate;
 	private int fireRateCount;
+	private int fireRateDelay;
 	private int magazine;
 	private int defaultMagazine;
 	private int ammo;
@@ -16,12 +21,12 @@ public class Gun extends Weapon {
 	private int reloadingCount;
 
 	public Gun(int x, int y, int radius, int angle, Human shooter, int gunType) {
-		super(x, y, radius, angle);
+		super(x-10, y-10, radius, angle);
 		// TODO Auto-generated constructor stub
 		this.gunType = gunType;
 		switch (gunType) {
 		case 0:
-			this.fireRate = 20;
+			this.fireRate = 35;
 			this.magazine = 8;
 			this.ammo = 42;
 			this.power = 10;
@@ -35,12 +40,16 @@ public class Gun extends Weapon {
 			this.reloadingTime = 10;
 			break;
 		}
-
+		this.fireRateDelay=60-fireRate;
 		this.shooter = shooter;
 		this.fireRateCount = 0;
 		this.reloadingTime = 0;
 		this.defaultMagazine = magazine;
 
+	}
+
+	public void setShooter(Human shooter) {
+		this.shooter = shooter;
 	}
 
 	public int getAmmo() {
@@ -126,49 +135,62 @@ public class Gun extends Weapon {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		x = shooter.getX();
-		y = shooter.getY();
+		x = shooter.getX()-10;
+		y = shooter.getY()-10;
 		angle = shooter.getAngle();
 	}
 
 	@Override
 	public void attack() {
 		// add new Bullet
-		if (hasAmmo()) {
-			if (hasMagazine()) {
-				reloadingCount=0;
-				if (fireRateCount >= fireRate) {
-					fireRateCount = 0;
+		
+		//if (hasAmmo()) {
+//			if (hasMagazine()) {
+				reloadingCount = 0;
+				if (fireRateCount < fireRateDelay) {
 					return;
+					
 				}
+					
 				switch (gunType) {
 				case 0:
-					new Bullet(x, y, angle - 1, power, 3, shooter);
-					new Bullet(x, y, angle, power, 3, shooter);
-					new Bullet(x, y, angle + 1, power, 3, shooter);
+					Bullet bullet = new Bullet(x, y, angle - 1, power, 3, shooter);
+
+					RenderableHolder.getInstance().add(bullet);
+					bullet = new Bullet(x, y, angle, power, 3, shooter);
+					GameLogic.addEntity(bullet);
+					RenderableHolder.getInstance().add(bullet);
+					bullet = new Bullet(x, y, angle + 1, power, 3, shooter);
+					GameLogic.addEntity(bullet);
+					RenderableHolder.getInstance().add(bullet);
+					System.out.println("shoot");
 					break;
 
 				default:
-					new Bullet(x, y, angle, power, 4, shooter);
+					bullet = new Bullet(x, y, angle, power, 4, shooter);
+					GameLogic.addEntity(bullet);
+					RenderableHolder.getInstance().add(bullet);
 					break;
 				}
-				fireRateCount += 10;
+				fireRateCount=0;
 				magazine--;
 				ammo--;
 				hasAmmo();
 				hasMagazine();
-			} else {
-				fireRateCount=0;
-				while (reload() || InputUtility.getKeyTriggered(((Player) shooter).getButton(5)))
-					;
-			}
-		}
+//			} else {
+//				fireRateCount = 0;
+//				while (reload() || InputUtility.getKeyTriggered(((Player) shooter).getButton(5)))
+//					;
+//			}
+		//}
 	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		move();
+		fireRateCount++;
+
 	}
 
 }
