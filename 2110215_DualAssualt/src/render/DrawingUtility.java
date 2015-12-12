@@ -29,11 +29,11 @@ public class DrawingUtility {
 	public static BufferedImage playerProfile = getImage("res/img/profile1.jpg");
 	
 	public static BufferedImage resizeImage(BufferedImage originalImage, int type) {
-		int newHeight = (originalImage.getHeight()*SettingScreen.screenHeight)/700;
+		int newHeight = SettingScreen.screenHeight/6;
 		int newWidht = (originalImage.getWidth()*SettingScreen.screenWidth)/1245;
-		BufferedImage resizedImage = new BufferedImage(newWidht, newHeight, type);
+		BufferedImage resizedImage = new BufferedImage(300, newHeight, type);
 		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(originalImage, 0, 0, newWidht, newHeight, null);
+		g.drawImage(originalImage, 0, 0, 300, newHeight, null);
 		g.dispose();
 		return resizedImage;
 	}
