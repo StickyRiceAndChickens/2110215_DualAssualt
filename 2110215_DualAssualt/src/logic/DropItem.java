@@ -2,18 +2,19 @@ package logic;
 
 import java.awt.Graphics2D;
 
-public class Enemy extends Human {
+import render.IRenderable;
 
-	
-	public Enemy(int life, int x, int y, int radius, int angle, Weapon weapon) {
-		super(life, x, y, radius, angle, weapon);
+public class DropItem extends Entity implements IRenderable{
+
+	public DropItem(int x, int y, int radius) {
+		super(x, y, radius);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public int getZ() {
 		// TODO Auto-generated method stub
-		return 100;
+		return 99;
 	}
 
 	@Override
@@ -25,19 +26,7 @@ public class Enemy extends Human {
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void attack() {
-		// TODO Auto-generated method stub
-		
+		return isDestroy();
 	}
 
 	@Override
