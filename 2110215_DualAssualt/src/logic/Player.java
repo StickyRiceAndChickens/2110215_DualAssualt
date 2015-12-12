@@ -6,7 +6,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import render.InputUtility;
-import render.SettingScreen;
 
 public class Player extends Human {
 
@@ -15,9 +14,9 @@ public class Player extends Human {
 	private int[] button;
 	private BufferedImage image;
 
-	public Player(int life, int x, int y, int radius, int angle, Weapon weapon, String name, int playerID,
+	public Player(int life, int x, int y, int angle, Weapon weapon, String name, int playerID,
 			BufferedImage image) {
-		super(life, x, y, radius, angle, weapon);
+		super(life, x, y, 20, angle, weapon);
 		// TODO Auto-generated constructor stub
 		this.name = name;
 		this.playerID = playerID;
@@ -80,7 +79,7 @@ public class Player extends Human {
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
-		return !isDead;
+		return !isDestroy;
 	}
 
 	@Override
@@ -95,7 +94,7 @@ public class Player extends Human {
 		at.rotate(Math.toRadians(angle));
 
 		// 2. just a scale because this image is big
-		at.scale(0.5, 0.5);
+		at.scale(1, 1);
 
 		// 1. translate the object so that you rotate it around the
 		// center (easier :))
@@ -141,7 +140,7 @@ public class Player extends Human {
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
-		if (InputUtility.getKeyPressed(button[5])) {
+		if (InputUtility.getKeyTriggered(button[5])) {
 			weapon.attack();
 			//System.out.print("use");
 		}

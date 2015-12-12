@@ -8,7 +8,6 @@ public abstract class Human extends Entity implements IRenderable{
 	protected int angle;
 	protected Weapon weapon;
 	
-	protected boolean isDead=false;
 	
 	public Human(int life, int x, int y,int radius, int angle, Weapon weapon) {
 		super(x, y,radius);
@@ -31,7 +30,7 @@ public abstract class Human extends Entity implements IRenderable{
 		this.life-=life;
 		if(this.life<0){
 			this.life=0;
-			isDead=true;
+			isDestroy=true;
 		}
 		
 	}

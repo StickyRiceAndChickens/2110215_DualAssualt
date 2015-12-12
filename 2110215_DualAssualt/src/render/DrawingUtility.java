@@ -24,6 +24,7 @@ public class DrawingUtility {
 	}
 	/*install image*/
 	protected static final BufferedImage bg = getImage("res/img/bgTitle.jpg");
-	public static final BufferedImage playerImage = getImage("res/img/charingame3.png");
+	public static final BufferedImage playerImage = getImage("res/img/charingame2.png");
 	public static BufferedImage playerProfile = getImage("res/img/profile1.jpg");
+	public static BufferedImage gunIcon = getImage("res/img/GunIcon.png");
 }

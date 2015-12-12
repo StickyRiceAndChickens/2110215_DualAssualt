@@ -41,10 +41,10 @@ public class GameLogic {
 	// Called before enter the game loop
 	public synchronized void onStart() {
 		//background = new GameBackground();
-		p1 = new Player(50, 100, 100, 10, 0, null, "BF", 1, DrawingUtility.playerImage);
+		p1 = new Player(50, 100, 100, 0, null, "BF", 1, DrawingUtility.playerImage);
 		gun1 = new Gun(100, 100, 10, 0, p1, 0);
 		p1.setWeapon(gun1);
-		p2 = new Player(50, 200, 200, 10, 0, null, "BF", 0, DrawingUtility.playerImage);
+		p2 = new Player(50, 200, 200, 0, null, "BF", 0, DrawingUtility.playerImage);
 		gun2 = new Gun(100, 100, 10, 0, p2, 1);
 		p2.setWeapon(gun2);
 		entities.add(p1);
@@ -65,6 +65,7 @@ public class GameLogic {
 	}
 
 	public void logicUpdate() {
+		
 		// Paused
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
 			/* fill code1 */
@@ -77,9 +78,17 @@ public class GameLogic {
 			entities.get(i).update();
 		
 		}
+		for (int i = 0; i < entities.size(); i++) {
+			if(entities.get(i).isDestroy()){
+				entities.remove(i);
+				i--;
+			}
+		
+		}
 		// Time up
 
 		// Shoot and grab
+		InputUtility.postUpdate();
 		
 	}
 

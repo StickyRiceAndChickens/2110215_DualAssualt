@@ -19,6 +19,7 @@ public class Gun extends Weapon {
 	private int power;
 	private int reloadingTime;
 	private int reloadingCount;
+	private boolean isReloading =false;
 
 	public Gun(int x, int y, int radius, int angle, Human shooter, int gunType) {
 		super(x, y, radius, angle);
@@ -28,14 +29,14 @@ public class Gun extends Weapon {
 		case 0:
 			this.fireRate = 35;
 			this.magazine = 8;
-			this.ammo = 42;
+			this.ammo = 40;
 			this.power = 10;
-			this.reloadingTime = 30;
+			this.reloadingTime = 750;
 			break;
 		case 1:
 			this.fireRate = 50;
 			this.magazine = 20;
-			this.ammo = 120;
+			this.ammo = 2420;
 			this.power = 2;
 			this.reloadingTime = 10;
 			break;
@@ -43,7 +44,7 @@ public class Gun extends Weapon {
 		this.fireRateDelay = 60 - fireRate;
 		this.shooter = shooter;
 		this.fireRateCount = 0;
-		this.reloadingTime = 0;
+		this.reloadingCount = 0;
 		this.defaultMagazine = magazine;
 
 	}
@@ -94,40 +95,23 @@ public class Gun extends Weapon {
 		}
 	}
 
-	public boolean reload() {
-		switch (gunType) {
-		case 0:
-			if (magazine < defaultMagazine) {
-				if (ammo > 0) {
-					if (reloadingCount < reloadingTime) {
-						reloadingCount++;
-						return true;
-					}
-
-					reloadingCount = 0;
-					magazine++;
-					ammo--;
-				} else
-					return false;
-			}
-
-			return false;
-		default:
+	public void reload() {
+		if(isReloading){
 			if (reloadingCount < reloadingTime) {
-				reloadingCount++;
-				return true;
+				return;
 			}
 
 			ammo += this.magazine;
 			if (ammo >= defaultMagazine) {
 				magazine = defaultMagazine;
-				ammo -= defaultMagazine;
+				
 			} else {
-				magazine = ammo;
-				ammo = 0;
+				magazine += ammo;
+				
 			}
 			reloadingCount = 0;
-			return false;
+			isReloading=false;
+			return;
 		}
 
 	}
@@ -146,27 +130,25 @@ public class Gun extends Weapon {
 
 		if (hasAmmo()) {
 			if (hasMagazine()) {
-				reloadingCount = 0;
+				
 				if (fireRateCount < fireRateDelay) {
 					return;
 
 				}
-
-				Bullet bullet = new Bullet(x, y, angle, power, 4, shooter);
+				fireRateCount = 0;
+				magazine--;
+				ammo--;
+				hasAmmo();
+				hasMagazine();
+				Bullet bullet = new Bullet(x, y, angle, power, 30, shooter);
 				GameLogic.addEntity(bullet);
 				RenderableHolder.getInstance().add(bullet);
+				return;
+			}else {
+				isReloading=true;
 				
 			}
-			fireRateCount = 0;
-			magazine--;
-			ammo--;
-			hasAmmo();
-			hasMagazine();
-		} else {
-			fireRateCount = 0;
-			while (reload() || InputUtility.getKeyTriggered(((Player) shooter).getButton(5)))
-				;
-		}
+		} 
 	}
 
 
@@ -174,7 +156,9 @@ public class Gun extends Weapon {
 	public void update() {
 		// TODO Auto-generated method stub
 		move();
+		reload();
 		fireRateCount++;
+		reloadingCount++;
 
 	}
 

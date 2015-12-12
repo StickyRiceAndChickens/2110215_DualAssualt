@@ -101,7 +101,7 @@ public class InputUtility {
 	public static void setKeyTriggered(int key, boolean pressed) {
 		if (key < 0 || key > 255)
 			return;
-		if (!keyPressed[key])
+		
 			keyTriggered[key] = pressed;
 	}
 

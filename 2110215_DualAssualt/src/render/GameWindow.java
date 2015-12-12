@@ -11,12 +11,17 @@ public class GameWindow extends JFrame{
 		super("Dual Assualt");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
-		//this.setUndecorated(true);
+		
 		
 		this.currentScene = scene;
 		getContentPane().add(currentScene);
+		this.setUndecorated(true);
 		pack();
+		
 		setVisible(true);
+		
+		this.setAlwaysOnTop(true);
+		
 		currentScene.requestFocus();
 	}
 	
