@@ -2,23 +2,21 @@ package logic;
 
 import render.IRenderable;
 
-public abstract class Human extends Entity implements IRenderable{
-	
+public abstract class Human extends Entity implements IRenderable {
+
 	protected int life;
 	protected int angle;
 	protected Weapon weapon;
-	
-	
-	public Human(int life, int x, int y,int radius, int angle, Weapon weapon) {
-		super(x, y,radius);
+	protected int id;
+
+	public Human(int life, int x, int y, int width, int height, int angle, Weapon weapon,int id) {
+		super(x, y, width, height,id);
 		this.life = life;
-		this.x = x;
-		this.y = y;
-		this.radius=radius;
 		this.angle = angle;
 		this.weapon = weapon;
+		
 	}
-
+	
 	public int getLife() {
 		return life;
 	}
@@ -26,14 +24,16 @@ public abstract class Human extends Entity implements IRenderable{
 	public void setLife(int life) {
 		this.life = life;
 	}
-	public void deceaseLife(int life){
-		this.life-=life;
-		if(this.life<0){
-			this.life=0;
-			isDestroy=true;
+
+	public void deceaseLife(int life) {
+		this.life -= life;
+		if (this.life < 0) {
+			this.life = 0;
+			isDestroy = true;
 		}
-		
+
 	}
+
 	public int getX() {
 		return x;
 	}
@@ -65,11 +65,11 @@ public abstract class Human extends Entity implements IRenderable{
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 	}
-	
-	
+
 	public abstract void move();
+
 	public abstract void attack();
+
 	public abstract void update();
-	
-	
+
 }

@@ -10,7 +10,6 @@ public class Gun extends Weapon {
 
 	private Human shooter;
 	private int gunType;
-	private int fireRate;
 	private int fireRateCount;
 	private int fireRateDelay;
 	private int magazine;
@@ -19,29 +18,30 @@ public class Gun extends Weapon {
 	private int power;
 	private int reloadingTime;
 	private int reloadingCount;
-	private boolean isReloading =false;
+	private boolean isReloading = false;
+	private boolean isShoot = false;
 
-	public Gun(int x, int y, int radius, int angle, Human shooter, int gunType) {
-		super(x, y, radius, angle);
+	public Gun(int x, int y, int angle, Human shooter, int gunType) {
+		super(x, y, 0,0, angle);
 		// TODO Auto-generated constructor stub
 		this.gunType = gunType;
 		switch (gunType) {
 		case 0:
-			this.fireRate = 35;
+			this.fireRateDelay = 5;
 			this.magazine = 8;
 			this.ammo = 40;
 			this.power = 10;
-			this.reloadingTime = 750;
+			this.reloadingTime = 50;
 			break;
 		case 1:
-			this.fireRate = 50;
+			this.fireRateDelay = 3;
 			this.magazine = 20;
 			this.ammo = 2420;
 			this.power = 2;
-			this.reloadingTime = 10;
+			this.reloadingTime = 30;
 			break;
 		}
-		this.fireRateDelay = 60 - fireRate;
+
 		this.shooter = shooter;
 		this.fireRateCount = 0;
 		this.reloadingCount = 0;
@@ -96,23 +96,17 @@ public class Gun extends Weapon {
 	}
 
 	public void reload() {
-		if(isReloading){
-			if (reloadingCount < reloadingTime) {
-				return;
-			}
 
-			ammo += this.magazine;
-			if (ammo >= defaultMagazine) {
-				magazine = defaultMagazine;
-				
-			} else {
-				magazine += ammo;
-				
-			}
-			reloadingCount = 0;
-			isReloading=false;
-			return;
+		ammo += this.magazine;
+		if (ammo >= defaultMagazine) {
+			magazine = defaultMagazine;
+
+		} else {
+			magazine += ammo;
+
 		}
+
+		return;
 
 	}
 
@@ -130,35 +124,57 @@ public class Gun extends Weapon {
 
 		if (hasAmmo()) {
 			if (hasMagazine()) {
-				
-				if (fireRateCount < fireRateDelay) {
-					return;
-
-				}
-				fireRateCount = 0;
-				magazine--;
-				ammo--;
-				hasAmmo();
-				hasMagazine();
-				Bullet bullet = new Bullet(x, y, angle, power, 30, shooter);
-				GameLogic.addEntity(bullet);
-				RenderableHolder.getInstance().add(bullet);
+				isShoot = true;
 				return;
-			}else {
-				isReloading=true;
-				
+
+			} else {
+				isReloading = true;
+
 			}
-		} 
+		}
 	}
 
+	public String getStatus() {
+		if (isReloading)
+			return "Reloading";
+		else
+			return "nothing";
+	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		move();
-		reload();
-		fireRateCount++;
-		reloadingCount++;
+
+		if (isShoot) {
+			fireRateCount++;
+			if (fireRateCount == fireRateDelay) {
+				fireRateCount = 0;
+				isShoot = false;
+				shoot();
+			}
+		}
+		if (isReloading) {
+			reloadingCount++;
+			if (reloadingCount == reloadingTime) {
+				reload();
+				reloadingCount = 0;
+				isReloading = false;
+			}
+		}
+		if (shooter.isDestroy())
+			this.isDestroy = true;
+	}
+
+	private void shoot() {
+		// TODO Auto-generated method stub
+		magazine--;
+		ammo--;
+		hasAmmo();
+		hasMagazine();
+		Bullet bullet = new Bullet(x, y, angle, power, 30, shooter);
+		GameLogic.map.addEntity(bullet);
+		RenderableHolder.getInstance().add(bullet);
 
 	}
 

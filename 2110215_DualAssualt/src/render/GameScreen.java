@@ -19,11 +19,12 @@ import javax.swing.JPanel;
 public class GameScreen extends JPanel {
 
 	private RenderableHolder renderableHolder;
+	
 
 	protected GameScreen() {
-		/* fill code */
 		
-		this.applyResize();
+		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+		
 		this.addListener();
 		this.validate();
 		setDoubleBuffered(true);
@@ -138,7 +139,5 @@ public class GameScreen extends JPanel {
 	/**
 	 * 
 	 */
-	protected void applyResize() {
-		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
-	}
+	
 }

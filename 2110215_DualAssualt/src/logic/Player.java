@@ -13,13 +13,14 @@ public class Player extends Human {
 	private int playerID;
 	private int[] button;
 	private BufferedImage image;
+	private int speed=1;
 
-	public Player(int life, int x, int y, int angle, Weapon weapon, String name, int playerID,
+	public Player(int life, int x, int y,int width,int height, int angle, Weapon weapon, String name, int playerID,
 			BufferedImage image) {
-		super(life, x, y, 20, angle, weapon);
+		super(life, x, y,width,height, angle, weapon,playerID);
 		// TODO Auto-generated constructor stub
 		this.name = name;
-		this.playerID = playerID;
+		
 		this.button = new int[7];
 		defualtButton(playerID);
 		this.image = image;
@@ -46,9 +47,7 @@ public class Player extends Human {
 		this.button[id] = button;
 	}
 
-	public int getPlayerID() {
-		return playerID;
-	}
+	
 
 	private void defualtButton(int playerID) {
 		if (playerID == 1) {
@@ -106,18 +105,20 @@ public class Player extends Human {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		int tempX=x;
+		int tempY=y;
 		if (InputUtility.getKeyPressed(button[0])) {
 			
-			y -= 1;
+			y -= speed;
 		}
 		if (InputUtility.getKeyPressed(button[1])) {
-			x -= 1;
+			x -= speed;
 		}
 		if (InputUtility.getKeyPressed(button[2])) {
-			y += 1;
+			y += speed;
 		}
 		if (InputUtility.getKeyPressed(button[3])) {
-			x += 1;
+			x += speed;
 		}
 		if (InputUtility.getKeyPressed(button[4])) {
 			angle -= 1;
@@ -126,7 +127,13 @@ public class Player extends Human {
 			angle += 1;
 			if(angle>360)angle=0;
 		}
-
+		System.out.println("x: "+x+" y: "+y+"map: "+GameLogic.map.getTerrainAt(x,y));
+		try{
+			GameLogic.map.UpdateMovingEntity(this, x, y);
+		}catch(ArrayIndexOutOfBoundsException e){
+			x=tempX;
+			y=tempY;
+		}
 	}
 
 	@Override

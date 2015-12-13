@@ -6,8 +6,8 @@ import render.IRenderable;
 
 public class DropItem extends Entity implements IRenderable{
 
-	public DropItem(int x, int y, int radius) {
-		super(x, y, radius);
+	public DropItem(int x, int y, int width,int height) {
+		super(x, y, width,height,0);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 public class Enemy extends Human {
 
 	
-	public Enemy(int life, int x, int y, int radius, int angle, Weapon weapon) {
-		super(life, x, y, radius, angle, weapon);
+	public Enemy(int life, int x, int y, int width,int height, int angle, Weapon weapon,int id) {
+		super(life, x, y, width,height, angle, weapon,id);
 		// TODO Auto-generated constructor stub
 	}
 

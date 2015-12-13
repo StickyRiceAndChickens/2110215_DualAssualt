@@ -23,17 +23,6 @@ public class GameManager {
 	public static void runGame(GameLogic gameLogic){
 		titleScene = new GameTitle();
 		
-//		if(gameLogic instanceof RenderableHolder){
-//			gameScreen = new GameScreen((RenderableHolder)gameLogic);
-//		}else{
-//			gameScreen = new GameScreen(new RenderableHolder() {
-//				private List<IRenderable> emptyList = new ArrayList<IRenderable>(0);
-//				@Override
-//				public List<IRenderable> getSortedRenderableObject() {
-//					return emptyList;
-//				}
-//			});
-//		}
 		gameScreen = new GameScreen();
 		
 		gameWindow = new GameWindow(titleScene);

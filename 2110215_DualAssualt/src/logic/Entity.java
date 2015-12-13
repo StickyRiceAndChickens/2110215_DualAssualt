@@ -2,15 +2,29 @@ package logic;
 
 public abstract class Entity {
 	protected int x,y;
-	public int radius;
+	public int width,height;
 	protected boolean isDestroy;
+	protected int id;
 
-	public Entity(int x, int y,int radius) {
+	public Entity(int x, int y,int width,int height,int id) {
 		
 		this.x = x;
 		this.y = y;
-		this.radius=radius;
+		this.width=width;
+		this.height=height;
 		this.isDestroy=false;
+		this.id=id;
+	}
+	
+	public int getID(){
+		return id;
+	}
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
 	}
 
 	public boolean isDestroy() {

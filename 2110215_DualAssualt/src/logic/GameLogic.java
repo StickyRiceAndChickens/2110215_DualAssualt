@@ -7,28 +7,25 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 import render.DrawingUtility;
 import render.GameBackground;
 import render.IRenderable;
 import render.InputUtility;
 import render.RenderableHolder;
+import render.SettingScreen;
 
 public class GameLogic {
 
 	// All renderable objects
 	private GameBackground background;
-	private Player p1,p2;
-	private Gun gun1,gun2;
-	private static List<Entity> entities = new CopyOnWriteArrayList<Entity>();
+	private Player p1, p2;
+	private Gun gun1, gun2;
+	public static Map map;
 
-	public static void addEntity(Entity e) {
-		 entities.add(e);
-	}
 	
-	public static List<Entity> getEntities() {
-		return entities;
-	}
+
+	
+
 	/*
 	 * Reserved z MIN_VALUE : background MAX_VALUE-1 : animation effect
 	 * MAX_VALUE : player's status
@@ -40,22 +37,32 @@ public class GameLogic {
 
 	// Called before enter the game loop
 	public synchronized void onStart() {
-		//background = new GameBackground();
-		p1 = new Player(50, 100, 100, 0, null, "BF", 1, DrawingUtility.playerImage);
-		gun1 = new Gun(100, 100, 10, 0, p1, 0);
+		background = new GameBackground();
+		map=new Map();
+		p1 = new Player(50, 100, 100, 20, 20, 0, null, "BF", 1, DrawingUtility.playerImage);
+		gun1 = new Gun(100, 100, 0, p1, 0);
 		p1.setWeapon(gun1);
-		p2 = new Player(50, 200, 200, 0, null, "BF", 0, DrawingUtility.playerImage);
-		gun2 = new Gun(100, 100, 10, 0, p2, 1);
+		p2 = new Player(50, 700, 400, 20, 20, 0, null, "BF", 2, DrawingUtility.playerImage);
+		gun2 = new Gun(100, 100, 0, p2, 1);
+		
 		p2.setWeapon(gun2);
-		entities.add(p1);
-		entities.add(gun1);
+		map.addEntity(p1);
+		map.addEntity(gun1);
 		RenderableHolder.getInstance().add(p1);
-		entities.add(p2);
-		entities.add(gun2);
+		map.addEntity(p2);
+		map.addEntity(gun2);
 		RenderableHolder.getInstance().add(p2);
-		GameStatusBar status=new GameStatusBar(p1, p2);
+		GameStatusBar status = new GameStatusBar(p1, p2);
 		RenderableHolder.getInstance().add(status);
+		RenderableHolder.getInstance().add(background);
 		readyToRender = true;
+		System.out.println("Map:");
+//		for(int h=0;h<SettingScreen.screenHeight/4;h++){
+//			for(int w=0;w<SettingScreen.screenWidth/4;w++){
+//				System.out.print(map.getTerrainAt(w, h));
+//			}
+//			System.out.println();
+//		}
 	}
 
 	// Called after exit the game loop
@@ -65,34 +72,20 @@ public class GameLogic {
 	}
 
 	public void logicUpdate() {
-		
+
 		// Paused
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
-			/* fill code1 */
+			
 			System.out.println("Enter");
 		}
 
 		// Update moving background
-//		background.updateBackground();
-		for (int i = 0; i < entities.size(); i++) {
-			entities.get(i).update();
+		background.updateBackground();
+		map.update();
 		
-		}
-		for (int i = 0; i < entities.size(); i++) {
-			if(entities.get(i).isDestroy()){
-				entities.remove(i);
-				i--;
-			}
-		
-		}
-		// Time up
-
-		// Shoot and grab
 		InputUtility.postUpdate();
-		
-	}
 
-	
+	}
 
 	public synchronized List<IRenderable> getSortedRenderableObject() {
 		List<IRenderable> sortedRenderable = new ArrayList<IRenderable>();

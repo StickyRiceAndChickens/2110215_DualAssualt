@@ -48,6 +48,7 @@ public class GameStatusBar implements IRenderable {
 		g2d.setColor(Color.BLACK);
 		g2d.setFont(new Font("Tahoma", Font.ITALIC, 30));
 		Gun gun = (Gun) p1.getWeapon();
+		g2d.drawString(gun.getStatus(), 145, SettingScreen.screenHeight - 35);
 		g2d.drawString(Integer.toString(gun.getMagazine()) + "/" + Integer.toString(gun.getAmmo()), 145,
 				SettingScreen.screenHeight - 10);
 	}
