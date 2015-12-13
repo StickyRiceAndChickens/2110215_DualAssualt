@@ -7,10 +7,13 @@ import render.IRenderable;
 public class LookingZone	extends Entity implements IRenderable{
 	
 	int angle;
+	double x,y;
 	
 	public LookingZone(int x, int y, int width, int height,int angle) {
 		super(x, y, width, height,0);
 		// TODO Auto-generated constructor stub
+		this.x=x;
+		this.y=y;
 		this.angle=angle;
 	}
 
