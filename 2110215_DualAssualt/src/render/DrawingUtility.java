@@ -29,11 +29,17 @@ public class DrawingUtility {
 	protected static final BufferedImage titleBG = getImage("res/img/bgTitle.png");
 	public static final BufferedImage playerImage = getImage("res/img/charingame2.png");
 	public static BufferedImage playerProfile = getImage("res/img/profile1.jpg");
-	public static BufferedImage bg = getImage("res/img/backgroundgrass.jpg");
+	public static BufferedImage bg = getImage("res/img/bgGrass.jpg");
 	public static BufferedImage newGame = DrawingUtility.getImage("res/img/buttonNewGame.png");
 	public static BufferedImage newGame2 = DrawingUtility.getImage("res/img/buttonNewGameMouseOn.png");
 	public static BufferedImage setting = DrawingUtility.getImage("res/img/buttonSetting.png");
-	public static BufferedImage quit=DrawingUtility.getImage("res/img/buttonQuit.png");public static BufferedImage statusBar = getImage("res/img/statusbar.png");
+	public static BufferedImage quit=DrawingUtility.getImage("res/img/buttonQuit.png");
+	public static BufferedImage statusBar = getImage("res/img/statusBar.png");
+	public static BufferedImage iconRifle = getImage("res/img/iconRifle.png");
+	public static BufferedImage iconShotgun = getImage("res/img/iconShotgun.png");
+	public static BufferedImage bgGunStatus = getImage("res/img/bgGunStatus.jpg");
+	public static BufferedImage bgChar = getImage("res/img/bgChar.jpg");
+	public static BufferedImage bgPlayerMenu = getImage("res/img/bgPlayerMenu.png");
 
 	public static BufferedImage resizeImage(BufferedImage originalImage, int type, int newWidth, int newHeight) {
 		BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, type);
