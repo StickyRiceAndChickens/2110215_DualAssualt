@@ -40,11 +40,11 @@ public class GameLogic {
 	public synchronized void onStart() {
 		background = new GameBackground();
 		map=new Map();
-		p1 = new Player(50, 800, 200, 20, 20, 0, null, "BF", 1, DrawingUtility.playerImage);
-		gun1 = new Gun(100, 100, 0, p1, 0);
+		p1 = new Player(50, 800, 200, 70, 40, 0, null, "BF", 1, DrawingUtility.playerImage);
+		gun1 = new Gun(800, 200, 0, p1, 0);
 		p1.setWeapon(gun1);
-		p2 = new Player(50, 700, 400, 20, 20, 0, null, "BF", 2, DrawingUtility.playerImage);
-		gun2 = new Gun(100, 100, 0, p2, 1);
+		p2 = new Player(50, 700, 400, 70, 40, 0, null, "BF", 2, DrawingUtility.playerImage);
+		gun2 = new Gun(700, 400, 0, p2, 1);
 		
 		p2.setWeapon(gun2);
 		map.addEntity(p1);
@@ -57,14 +57,21 @@ public class GameLogic {
 		RenderableHolder.getInstance().add(status);
 		RenderableHolder.getInstance().add(background);
 		
-		e1=new Enemy(30, 500, 200, 20, 20, 0, null, 3);
-		gun3 = new Gun(100, 100, 0, e1, 3);
+		e1=new Enemy(30, 500, 200, 70, 40, 180, null, 3,DrawingUtility.playerImage);
+		gun3 = new Gun(500, 200, 0, e1, 3);
 		
 		e1.setWeapon(gun3);
 		map.addEntity(e1);
 		map.addEntity(gun3);
 		RenderableHolder.getInstance().add(e1);
 		
+		e2=new Enemy(30, 100, 100, 70, 40, 0, null, 4,DrawingUtility.playerImage);
+		gun4 = new Gun(100, 100, 0, e2, 3);
+		
+		e2.setWeapon(gun4);
+		map.addEntity(e2);
+		map.addEntity(gun4);
+		RenderableHolder.getInstance().add(e2);
 		
 		readyToRender = true;
 		System.out.println("Map:");

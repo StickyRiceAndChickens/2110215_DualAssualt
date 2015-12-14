@@ -24,12 +24,12 @@ public class Enemy extends Human {
 		this.hitAngle = hitAngle;
 	}
 
-	public Enemy(int life, int x, int y, int width, int height, int angle, Weapon weapon, int id) {
+	public Enemy(int life, int x, int y, int width, int height, int angle, Weapon weapon, int id,BufferedImage image) {
 		super(life, x, y, width, height, angle, weapon, id);
 		// TODO Auto-generated constructor stub
 		this.prevLife = life;
 		this.look = new LookingZone(this);
-		this.image = DrawingUtility.playerImage;
+		this.image  = DrawingUtility.resizeImage(image, image.getType(), width, height);;
 	}
 
 	public boolean getHit() {
@@ -100,6 +100,7 @@ public class Enemy extends Human {
 					isMiss = false;
 					missAngle=0;
 				}
+				return;
 			}
 		}
 

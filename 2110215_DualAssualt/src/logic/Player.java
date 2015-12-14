@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+import render.DrawingUtility;
 import render.InputUtility;
 
 public class Player extends Human {
@@ -24,7 +25,7 @@ public class Player extends Human {
 
 		this.button = new int[7];
 		defualtButton(playerID);
-		this.image = image;
+		this.image = DrawingUtility.resizeImage(image, image.getType(), width, height);
 		look = new LookingZone(this);
 	}
 

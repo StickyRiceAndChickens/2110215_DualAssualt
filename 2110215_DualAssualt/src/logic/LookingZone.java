@@ -36,7 +36,8 @@ public class LookingZone {
 		return map;
 
 	}
-
+	
+	
 	public ArrayList<Integer> detectZone(int lookingRange, int angle) {
 		ArrayList<Integer> detectIds = new ArrayList<>();
 		int missAngle = 0;
@@ -49,6 +50,7 @@ public class LookingZone {
 			}
 			
 		}
+		
 //		if(human instanceof Enemy){
 //			((Enemy) human).setMissAngle(missAngle);
 //		}

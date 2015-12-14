@@ -42,11 +42,10 @@ public class Map {
 	public void addEntity(Entity e) {
 
 		entities.add(e);
-		if (e instanceof Player) {
-			bookingEntityArea(e, ((Player) e).getID());
-		} else if (e instanceof Enemy) {
-			bookingEntityArea(e, 3);
-		} else if (e instanceof MapObject) {
+		if (e instanceof Human) {
+			bookingEntityArea(e, ((Human) e).getID());
+		}
+		else if (e instanceof MapObject) {
 			bookingEntityArea(e, -1);
 		}
 
@@ -94,10 +93,9 @@ public class Map {
 
 			}
 		}
-		if (e instanceof Player) {
-			type = ((Player) e).getID();
-		} else if (e instanceof Enemy) {
-			type = 3;
+		if (e instanceof Human) {
+			type = ((Human) e).getID();
+		
 		} else if (e instanceof MapObject) {
 			type = -1;
 		}
