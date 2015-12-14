@@ -1,3 +1,4 @@
+
 package render;
 
 import java.awt.Graphics2D;
@@ -71,4 +72,3 @@ public class GameBackground implements IRenderable{
 
 	
 }
-
