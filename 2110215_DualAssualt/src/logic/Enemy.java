@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import render.DrawingUtility;
 
@@ -24,12 +26,13 @@ public class Enemy extends Human {
 		this.hitAngle = hitAngle;
 	}
 
-	public Enemy(int life, int x, int y, int width, int height, int angle, Weapon weapon, int id,BufferedImage image) {
+	public Enemy(int life, int x, int y, int width, int height, int angle, Weapon weapon, int id, BufferedImage image) {
 		super(life, x, y, width, height, angle, weapon, id);
 		// TODO Auto-generated constructor stub
 		this.prevLife = life;
 		this.look = new LookingZone(this);
-		this.image  = DrawingUtility.resizeImage(image, image.getType(), width, height);;
+		this.image = DrawingUtility.resizeImage(image, image.getType(), width, height);
+		;
 	}
 
 	public boolean getHit() {
@@ -88,20 +91,24 @@ public class Enemy extends Human {
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
-		ArrayList<Integer> detectCheck = look.detectZone(30, angle);
-		for (int i = 0; i < detectCheck.size(); i++) {
-			int d = detectCheck.get(i);
+		List<Integer> detectCheck = look.detectZone(30, angle);
+		Iterator<Integer> iter = detectCheck.iterator();
+
+		while (iter.hasNext()) {
+			Integer d = iter.next();
+
 			if (d == 1 || d == 2) {
 				weapon.attack();
-				if (look.checkLooking( angle) != 1 && look.checkLooking( angle) != 2) {
+				if (look.checkLooking(angle) != 1 && look.checkLooking(angle) != 2) {
 					isMiss = true;
-					
-				} else{
+
+				} else {
 					isMiss = false;
-					missAngle=0;
+					missAngle = 0;
 				}
 				return;
 			}
+
 		}
 
 	}

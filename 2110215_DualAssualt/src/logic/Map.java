@@ -1,6 +1,10 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import render.SettingScreen;
@@ -8,6 +12,7 @@ import render.SettingScreen;
 public class Map {
 	private static int[][] map;
 	private List<Entity> entities;
+	
 
 	public Map() {
 		map = new int[SettingScreen.screenWidth][SettingScreen.screenHeight - (SettingScreen.screenHeight / 5)];
@@ -21,7 +26,7 @@ public class Map {
 		}
 	}
 
-	public CopyOnWriteArrayList<Entity> getEntities() {
+	public List<Entity> getEntities() {
 		return (CopyOnWriteArrayList<Entity>) entities;
 	}
 
@@ -40,12 +45,24 @@ public class Map {
 	}
 
 	public void addEntity(Entity e) {
+		ListIterator<Entity> iterator = this.entities.listIterator();
+		boolean marker = false;
 
-		entities.add(e);
+		if(entities.isEmpty())
+		    this.entities.add(e);
+		else {
+		   while (iterator.hasNext()) {
+		      if(((Entity) iterator.next()).isOverlapped(e) == false)
+		         marker = true;
+		   }
+		}
+
+		if (marker == true)
+		    entities.add(e);
+		it.add(e);
 		if (e instanceof Human) {
 			bookingEntityArea(e, ((Human) e).getID());
-		}
-		else if (e instanceof MapObject) {
+		} else if (e instanceof MapObject) {
 			bookingEntityArea(e, -1);
 		}
 
@@ -58,8 +75,8 @@ public class Map {
 	}
 
 	private void bookingEntityArea(Entity e, int type) {
-		for (int w = -e.getHeight(); w < e.getHeight(); w++) {
-			for (int h = -e.getWidth(); h < e.getWidth(); h++) {
+		for (int w = -e.getHeight() / 2; w < e.getHeight() / 2; w++) {
+			for (int h = -e.getWidth() / 2; h < e.getWidth() / 2; h++) {
 				map[e.getX() + w][e.getY() + h] = type;
 
 			}
@@ -67,13 +84,16 @@ public class Map {
 	}
 
 	public void update() {
-		for (int i = 0; i < entities.size(); i++) {
-			if (entities.get(i).isDestroy()) {
-				removeEntity(entities.get(i));
-				entities.remove(i);
-				i--;
+		Iterator<Entity> ite = entities.iterator();
+		while (ite.hasNext()) {
+			Entity e = ite.next();
+			if (e.isDestroy()) {
+				removeEntity(e);
+				ite.remove();
+
 			}
 		}
+
 		for (int i = 0; i < entities.size(); i++) {
 			int tempX = entities.get(i).getX();
 			int tempY = entities.get(i).getY();
@@ -95,11 +115,11 @@ public class Map {
 		}
 		if (e instanceof Human) {
 			type = ((Human) e).getID();
-		
+
 		} else if (e instanceof MapObject) {
 			type = -1;
 		}
-		
+
 		bookingEntityArea(e, type);
 	}
 }

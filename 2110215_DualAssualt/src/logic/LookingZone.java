@@ -2,6 +2,8 @@ package logic;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import render.IRenderable;
 
@@ -38,12 +40,12 @@ public class LookingZone {
 	}
 	
 	
-	public ArrayList<Integer> detectZone(int lookingRange, int angle) {
-		ArrayList<Integer> detectIds = new ArrayList<>();
-		int missAngle = 0;
+	public List<Integer> detectZone(int lookingRange, int angle) {
+		List<Integer> detectIds = new CopyOnWriteArrayList();
 		for (int angleI = -lookingRange; angleI <= lookingRange; angleI++) {
 			int tmpCheck = checkLooking(angle + angleI);
-			if (tmpCheck != 3 && tmpCheck != 0) {
+			if (tmpCheck !=-3 && tmpCheck != 0) {
+				
 				detectIds.add(tmpCheck);
 //				if (missAngle == 0)
 //					missAngle = angle + angleI;
