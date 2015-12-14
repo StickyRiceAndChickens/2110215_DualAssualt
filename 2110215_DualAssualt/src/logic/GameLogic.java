@@ -57,6 +57,7 @@ public class GameLogic {
 		RenderableHolder.getInstance().add(background);
 		readyToRender = true;
 		System.out.println("Map:");
+		background.updateBackground();
 //		for(int h=0;h<SettingScreen.screenHeight/4;h++){
 //			for(int w=0;w<SettingScreen.screenWidth/4;w++){
 //				System.out.print(map.getTerrainAt(w, h));
@@ -80,7 +81,7 @@ public class GameLogic {
 		}
 
 		// Update moving background
-		background.updateBackground();
+		
 		map.update();
 		
 		InputUtility.postUpdate();

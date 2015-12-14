@@ -11,7 +11,7 @@ public class GameBackground implements IRenderable{
 	private int imageWidth;
 	
 	public GameBackground(){
-		bgImage = DrawingUtility.bg;
+		bgImage = DrawingUtility.resizeImage2(DrawingUtility.bg, 2, 40, 40);;
 		if(bgImage != null){
 			imageWidth = bgImage.getWidth();
 		}else{
@@ -47,6 +47,7 @@ public class GameBackground implements IRenderable{
 		int currentDrawingX = 0;
 		int currentDrawingY = 0;
 		
+//		
 		while(currentDrawingY < SettingScreen.screenHeight){
 			g2d.drawImage(bgImage.getSubimage(currentX, 0, imageWidth-currentX, bgImage.getHeight()),
 					null, currentDrawingX, currentDrawingY);
@@ -62,6 +63,9 @@ public class GameBackground implements IRenderable{
 			}
 			currentDrawingX += imageWidth;
 			currentDrawingY = 0;
+		
+		
+//		
 		}
 	}
 

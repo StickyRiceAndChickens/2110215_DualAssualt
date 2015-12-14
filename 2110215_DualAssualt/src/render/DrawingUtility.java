@@ -40,6 +40,14 @@ public class DrawingUtility {
 		return resizedImage;
 	}
 	
+	public static BufferedImage resizeImage2(BufferedImage originalImage, int type, int newWidth, int newHeight) {
+		BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, type);
+		Graphics2D g = resizedImage.createGraphics();
+		g.drawImage(originalImage, 0, 0, newWidth , newHeight, null);
+		g.dispose();
+		return resizedImage;
+	}
+	
 	public static BufferedImage resizeButton(BufferedImage originalImage, int type) {
 		BufferedImage resizedImage = new BufferedImage(originalImage.getWidth(), originalImage.getWidth(), type);
 		Graphics2D g = resizedImage.createGraphics();
