@@ -183,5 +183,9 @@ public class Gun extends Weapon {
 		RenderableHolder.getInstance().add(bullet);
 
 	}
+	
+	public int getGunType() {
+		return gunType;
+	}
 
 }
