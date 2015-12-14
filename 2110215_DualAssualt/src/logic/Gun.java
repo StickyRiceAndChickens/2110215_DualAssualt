@@ -29,14 +29,14 @@ public class Gun extends Weapon {
 		case 0:
 			this.fireRateDelay = 5;
 			this.magazine = 8;
-			this.ammo = 40;
+			this.ammo = 300;
 			this.power = 10;
 			this.reloadingTime = 50;
 			break;
 		case 1:
 			this.fireRateDelay = 3;
 			this.magazine = 20;
-			this.ammo = 2420;
+			this.ammo = 520;
 			this.power = 4;
 			this.reloadingTime = 30;
 			break;
@@ -44,7 +44,7 @@ public class Gun extends Weapon {
 			this.fireRateDelay=20;
 			this.magazine=8;
 			this.power=3;
-			this.ammo=Integer.MAX_VALUE;
+			this.ammo=5000;
 			this.reloadingTime=30;
 		}
 

@@ -10,7 +10,7 @@ import logic.GameLogic;
 
 public class GameManager {
 
-	private static final int REFRESH_DELAY = 20;
+	private static final int REFRESH_DELAY = 10;
 	
 	
 	private static GameTitle titleScene;

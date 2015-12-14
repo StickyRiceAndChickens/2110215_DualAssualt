@@ -69,12 +69,12 @@ public class GameLogic {
 		readyToRender = true;
 		System.out.println("Map:");
 		background.updateBackground();
-//		for(int h=0;h<SettingScreen.screenHeight/4;h++){
-//			for(int w=0;w<SettingScreen.screenWidth/4;w++){
-//				System.out.print(map.getTerrainAt(w, h));
-//			}
-//			System.out.println();
-//		}
+		for(int h=0;h<SettingScreen.screenHeight/4;h++){
+			for(int w=0;w<SettingScreen.screenWidth/4;w++){
+				System.out.print(map.getTerrainAt(w, h));
+			}
+			System.out.println();
+		}
 	}
 
 	// Called after exit the game loop
