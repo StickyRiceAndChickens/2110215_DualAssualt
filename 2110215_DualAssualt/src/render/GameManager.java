@@ -23,6 +23,7 @@ public class GameManager {
 	public static void runGame(GameLogic gameLogic){
 		titleScene = new GameTitle();
 		
+		playerMenuScreen = new PlayerMenuScreen();
 
 		gameScreen = new GameScreen();
 		
