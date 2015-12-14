@@ -10,16 +10,16 @@ public class TitleBackground implements IRenderable{
 	public static int imageHeight;
 	
 	public TitleBackground(){
-		this.titleBG = resizeImage(DrawingUtility.titleBG, 1);
+		this.titleBG = DrawingUtility.resizeImage(DrawingUtility.titleBG, 1, SettingScreen.screenWidth-300, SettingScreen.screenHeight);
 	}
 	
-	public static BufferedImage resizeImage(BufferedImage originalImage, int type) {
-		BufferedImage resizedImage = new BufferedImage(SettingScreen.screenWidth, SettingScreen.screenHeight, type);
-		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(originalImage, 0, 0, SettingScreen.screenWidth-300, SettingScreen.screenHeight, null);
-		g.dispose();
-		return resizedImage;
-	}
+//	public static BufferedImage resizeImage(BufferedImage originalImage, int type) {
+//		BufferedImage resizedImage = new BufferedImage(SettingScreen.screenWidth, SettingScreen.screenHeight, type);
+//		Graphics2D g = resizedImage.createGraphics();
+//		g.drawImage(originalImage, 0, 0, SettingScreen.screenWidth-300, SettingScreen.screenHeight, null);
+//		g.dispose();
+//		return resizedImage;
+//	}
 	
 	
 	public void draw(Graphics2D g2d) {
