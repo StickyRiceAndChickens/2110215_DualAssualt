@@ -32,11 +32,12 @@ public class GameStatusBar implements IRenderable {
 		g2d.setColor(new Color(67, 73, 246));
 		g2d.fillRect(0, SettingScreen.screenHeight - (SettingScreen.screenHeight / 5), SettingScreen.screenWidth,
 				(SettingScreen.screenHeight / 5));
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.statusBar, 2, SettingScreen.screenWidth, SettingScreen.screenHeight/5), null, 0, SettingScreen.screenHeight-SettingScreen.screenHeight/5);
 		g2d.setColor(new Color(210, 210, 210));
 		g2d.setFont(new Font("Tahoma", Font.BOLD, 30));
 		g2d.drawString(p1.getName(), 5, SettingScreen.screenHeight - 10);
 		g2d.drawImage(DrawingUtility.playerProfile, null, 5,
-				(SettingScreen.screenHeight - (SettingScreen.screenHeight / 5)) + 10);
+				(SettingScreen.screenHeight - (SettingScreen.screenHeight / 5)) + 30);
 		Color lifeColor = new Color(68, 255, 0);
 		if (p1.getLife() < 15) {
 			lifeColor = new Color(255, 0, 0);
@@ -44,7 +45,7 @@ public class GameStatusBar implements IRenderable {
 			lifeColor = new Color(255, 230, 0);
 		}
 		g2d.setColor(lifeColor);
-		g2d.fillRect(120, SettingScreen.screenHeight - (SettingScreen.screenHeight / 5) + 20, p1.getLife() * 5, 30);
+		g2d.fillRect(120, SettingScreen.screenHeight - (SettingScreen.screenHeight / 5) + 40, p1.getLife() * 5, 30);
 		g2d.setColor(Color.BLACK);
 		g2d.setFont(new Font("Tahoma", Font.ITALIC, 30));
 		Gun gun = (Gun) p1.getWeapon();
