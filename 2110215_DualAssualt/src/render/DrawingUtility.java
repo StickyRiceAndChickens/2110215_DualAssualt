@@ -29,6 +29,7 @@ public class DrawingUtility {
 	public static final BufferedImage playerImage = getImage("res/img/charingame2.png");
 	public static BufferedImage playerProfile = getImage("res/img/profile1.jpg");
 	public static BufferedImage bg = getImage("res/img/backgroundgrass.jpg");
+	public static BufferedImage statusBar = getImage("res/img/statusbar.png");
 	
 //	public static BufferedImage resizeImage(BufferedImage originalImage, int type) {
 //		int newHeight = SettingScreen.screenHeight/6;
