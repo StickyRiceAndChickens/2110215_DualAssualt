@@ -10,21 +10,22 @@ import render.InputUtility;
 public class Player extends Human {
 
 	private String name;
-	private int playerID;
+
 	private int[] button;
 	private BufferedImage image;
-	private int speed=1;
+	private int speed = 3;
+	private LookingZone look;
 
-	public Player(int life, int x, int y,int width,int height, int angle, Weapon weapon, String name, int playerID,
+	public Player(int life, int x, int y, int width, int height, int angle, Weapon weapon, String name, int playerID,
 			BufferedImage image) {
-		super(life, x, y,width,height, angle, weapon,playerID);
+		super(life, x, y, width, height, angle, weapon, playerID);
 		// TODO Auto-generated constructor stub
 		this.name = name;
-		
+
 		this.button = new int[7];
 		defualtButton(playerID);
 		this.image = image;
-		System.out.print(button[0]);
+		look = new LookingZone(this);
 	}
 
 	public String getName() {
@@ -46,8 +47,6 @@ public class Player extends Human {
 	public void setButton(int id, int button) {
 		this.button[id] = button;
 	}
-
-	
 
 	private void defualtButton(int playerID) {
 		if (playerID == 1) {
@@ -105,10 +104,10 @@ public class Player extends Human {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		int tempX=x;
-		int tempY=y;
+		int tempX = x;
+		int tempY = y;
 		if (InputUtility.getKeyPressed(button[0])) {
-			
+
 			y -= speed;
 		}
 		if (InputUtility.getKeyPressed(button[1])) {
@@ -121,19 +120,23 @@ public class Player extends Human {
 			x += speed;
 		}
 		if (InputUtility.getKeyPressed(button[4])) {
-			angle -= 1;
-			if(angle<0)angle=360;
+			angle -= 7;
+			if (angle < 0)
+				angle = 360;
 		} else if (InputUtility.getKeyPressed(button[6])) {
-			angle += 1;
-			if(angle>360)angle=0;
+			angle += 7;
+			if (angle > 360)
+				angle = 0;
 		}
-		System.out.println("x: "+x+" y: "+y+"map: "+GameLogic.map.getTerrainAt(x,y));
-		try{
+		
+		try {
 			GameLogic.map.UpdateMovingEntity(this, x, y);
-		}catch(ArrayIndexOutOfBoundsException e){
-			x=tempX;
-			y=tempY;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			x = tempX;
+			y = tempY;
 		}
+		look.update();
+		
 	}
 
 	@Override
@@ -141,7 +144,7 @@ public class Player extends Human {
 		// TODO Auto-generated method stub
 		move();
 		attack();
-		
+
 	}
 
 	@Override
@@ -149,7 +152,7 @@ public class Player extends Human {
 		// TODO Auto-generated method stub
 		if (InputUtility.getKeyTriggered(button[5])) {
 			weapon.attack();
-			//System.out.print("use");
+			// System.out.print("use");
 		}
 	}
 

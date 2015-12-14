@@ -79,6 +79,7 @@ public class Map {
 			int tempX = entities.get(i).getX();
 			int tempY = entities.get(i).getY();
 			entities.get(i).update();
+			UpdateMovingEntity(entities.get(i), tempX, tempY);
 			if (entities.get(i) instanceof Bullet) {
 				((Bullet) entities.get(i)).isHit();
 			}
@@ -87,6 +88,12 @@ public class Map {
 
 	void UpdateMovingEntity(Entity e, int tempX, int tempY) {
 		int type = 0;
+		for (int w = -e.getHeight(); w < e.getHeight(); w++) {
+			for (int h = -e.getWidth(); h < e.getWidth(); h++) {
+				map[tempX + w][tempY + h] = type;
+
+			}
+		}
 		if (e instanceof Player) {
 			type = ((Player) e).getID();
 		} else if (e instanceof Enemy) {
@@ -94,12 +101,7 @@ public class Map {
 		} else if (e instanceof MapObject) {
 			type = -1;
 		}
-		for (int w = -e.getHeight(); w < e.getHeight(); w++) {
-			for (int h = -e.getWidth(); h < e.getWidth(); h++) {
-				map[tempX + w][tempY + h] = type;
-
-			}
-		}
+		
 		bookingEntityArea(e, type);
 	}
 }

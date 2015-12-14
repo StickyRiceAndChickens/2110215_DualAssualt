@@ -19,7 +19,8 @@ public class GameLogic {
 	// All renderable objects
 	private GameBackground background;
 	private Player p1, p2;
-	private Gun gun1, gun2;
+	private Enemy e1, e2;
+	private Gun gun1, gun2,gun3,gun4;
 	public static Map map;
 
 	
@@ -30,7 +31,7 @@ public class GameLogic {
 	 * Reserved z MIN_VALUE : background MAX_VALUE-1 : animation effect
 	 * MAX_VALUE : player's status
 	 */
-	private int zCounter = Integer.MIN_VALUE + 1;
+	private int idCounter =  3;
 	private int nextObjectCreationDelay;
 	private boolean readyToRender = false; // For dealing with synchronization
 											// issue
@@ -39,7 +40,7 @@ public class GameLogic {
 	public synchronized void onStart() {
 		background = new GameBackground();
 		map=new Map();
-		p1 = new Player(50, 100, 100, 20, 20, 0, null, "BF", 1, DrawingUtility.playerImage);
+		p1 = new Player(50, 800, 200, 20, 20, 0, null, "BF", 1, DrawingUtility.playerImage);
 		gun1 = new Gun(100, 100, 0, p1, 0);
 		p1.setWeapon(gun1);
 		p2 = new Player(50, 700, 400, 20, 20, 0, null, "BF", 2, DrawingUtility.playerImage);
@@ -55,6 +56,16 @@ public class GameLogic {
 		GameStatusBar status = new GameStatusBar(p1, p2);
 		RenderableHolder.getInstance().add(status);
 		RenderableHolder.getInstance().add(background);
+		
+		e1=new Enemy(30, 500, 200, 20, 20, 0, null, 3);
+		gun3 = new Gun(100, 100, 0, e1, 3);
+		
+		e1.setWeapon(gun3);
+		map.addEntity(e1);
+		map.addEntity(gun3);
+		RenderableHolder.getInstance().add(e1);
+		
+		
 		readyToRender = true;
 		System.out.println("Map:");
 		background.updateBackground();

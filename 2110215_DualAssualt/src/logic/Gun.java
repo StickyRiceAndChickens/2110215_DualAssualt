@@ -37,9 +37,15 @@ public class Gun extends Weapon {
 			this.fireRateDelay = 3;
 			this.magazine = 20;
 			this.ammo = 2420;
-			this.power = 2;
+			this.power = 4;
 			this.reloadingTime = 30;
 			break;
+		case 3:
+			this.fireRateDelay=20;
+			this.magazine=8;
+			this.power=3;
+			this.ammo=Integer.MAX_VALUE;
+			this.reloadingTime=30;
 		}
 
 		this.shooter = shooter;

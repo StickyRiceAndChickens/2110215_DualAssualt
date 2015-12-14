@@ -10,8 +10,8 @@ import logic.GameLogic;
 
 public class GameManager {
 
-	private static final int REFRESH_DELAY = 10;
-	public static final int TICK_PER_SECONDS = 1000/REFRESH_DELAY;
+	private static final int REFRESH_DELAY = 20;
+	
 	
 	private static GameTitle titleScene;
 	private static GameScreen gameScreen;

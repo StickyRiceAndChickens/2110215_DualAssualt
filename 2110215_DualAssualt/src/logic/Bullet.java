@@ -12,6 +12,7 @@ public class Bullet extends Weapon implements IRenderable {
 	private int power;
 	private int speed;
 	private double x, y;
+	private int hitAngle;
 
 	public Bullet(int x, int y, int angle, int power, int speed, Human shooter) {
 		super(x, y, 6, 6, angle);
@@ -43,6 +44,7 @@ public class Bullet extends Weapon implements IRenderable {
 						&& GameLogic.map.getTerrainAt((int) x + w, (int) y + h) != shooter.getID()) {
 					somethingInMap = true;
 					hitID = GameLogic.map.getTerrainAt((int) x + w, (int) y + h);
+					
 					break;
 				}
 			}
@@ -54,14 +56,19 @@ public class Bullet extends Weapon implements IRenderable {
 					this.isDestroy = true;
 					if (e instanceof Human) {
 						((Human) e).deceaseLife(power);
+						if(e instanceof Enemy)
+							((Enemy) e).setHitAngle(angle);
 						return true;
 					}
+					
 
 				}
 			}
 		return false;
 
 	}
+
+	
 
 	@Override
 	public int getZ() {
