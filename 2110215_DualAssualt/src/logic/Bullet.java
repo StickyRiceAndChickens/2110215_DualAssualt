@@ -30,35 +30,34 @@ public class Bullet extends Weapon implements IRenderable {
 		if (!isDestroy()) {
 			x = (x + speed * Math.cos(Math.toRadians(angle)));
 			y = (y + speed * Math.sin(Math.toRadians(angle)));
-			if(GameLogic.map.outOfField((int)x,(int) y))
-				isDestroy=true;
+			if (GameLogic.map.outOfField((int) x, (int) y))
+				isDestroy = true;
 		}
 	}
 
 	public boolean isHit() {
 		// TODO Auto-generated method stub
-		
-		
-		if (!this.isDestroy() )
+
+		if (!this.isDestroy())
 			for (Entity e : GameLogic.map.getEntities()) {
 				if (isOverlap(e)) {
-
-					this.isDestroy = true;
-					if (e instanceof Human) {
-						((Human) e).deceaseLife(power);
-						if(e instanceof Enemy)
-							((Enemy) e).setHitAngle(angle);
-						return true;
+					if (e != shooter && e != shooter.getWeapon()) {
+						{
+							this.isDestroy = true;
+							if (e instanceof Human) {
+								((Human) e).deceaseLife(power);
+								if (e instanceof Enemy)
+									((Enemy) e).setHitAngle(angle);
+								return true;
+							}
+						}
 					}
-					
 
 				}
 			}
 		return false;
 
 	}
-
-	
 
 	@Override
 	public int getZ() {

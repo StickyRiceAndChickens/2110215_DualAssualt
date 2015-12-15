@@ -27,6 +27,7 @@ public class Gun extends Weapon {
 		this.gunType = gunType;
 		switch (gunType) {
 		case 0:
+			//shotgun
 			this.fireRateDelay = 5;
 			this.magazine = 8;
 			this.ammo = 300;
@@ -34,6 +35,7 @@ public class Gun extends Weapon {
 			this.reloadingTime = 50;
 			break;
 		case 1:
+			//rifle
 			this.fireRateDelay = 3;
 			this.magazine = 20;
 			this.ammo = 520;

@@ -45,7 +45,12 @@ public class GameManager {
 				gameLogic.logicUpdate();
 				InputUtility.postUpdate();
 			}
+			if (gameWindow.getCurrentScene() instanceof PlayerMenuScreen) {
+				playerMenuScreen.update();
+				InputUtility.postUpdate();
+			}
 			if (nextScene != null) {
+				
 				if (gameWindow.getCurrentScene() instanceof GameScreen)
 					gameLogic.onExit();
 				gameWindow.switchScene(nextScene);
@@ -76,19 +81,18 @@ public class GameManager {
 		gameWindow.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 		gameWindow.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 
-
 		titleScene.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 		titleScene.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
-		
+
 		gameScreen.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 		gameScreen.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 
 		playerMenuScreen.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 		playerMenuScreen.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
-		
+
 		settingScreen.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 		settingScreen.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
-		
+
 		titleScene.validate();
 	}
 }

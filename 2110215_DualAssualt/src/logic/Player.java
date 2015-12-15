@@ -118,42 +118,44 @@ public class Player extends Human {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		int nextX = x;
-		int nextY = y;
-		int nextAngle=angle;
+		int prevX = x;
+		int prevY = y;
+		int prevAngle = angle;
+		
 		if (InputUtility.getKeyPressed(button[0])) {
 
-			nextY -= speed;
+			y -= speed;
 		}
 		if (InputUtility.getKeyPressed(button[1])) {
-			nextX -= speed;
+			x -= speed;
 		}
 		if (InputUtility.getKeyPressed(button[2])) {
-			nextY += speed;
+			y += speed;
 		}
 		if (InputUtility.getKeyPressed(button[3])) {
-			nextX += speed;
+			x += speed;
 		}
 		if (InputUtility.getKeyPressed(button[4])) {
-			nextAngle -= 7;
-			if (nextAngle < 0)
-				nextAngle = 360;
+			angle -= 7;
+			if (angle < 0)
+				angle = 360;
 		} else if (InputUtility.getKeyPressed(button[6])) {
-			nextAngle += 7;
-			if (nextAngle > 360)
-				nextAngle = 0;
+			angle += 7;
+			if (angle > 360)
+				angle = 0;
 		}
-		boolean cantMove=false;
+		boolean cantMove = false;
 		for (Entity e : GameLogic.map.getEntities()) {
-			if (isOverlap(e)) {
-				cantMove=true;
-				break;
-			}
+			
+				if (isOverlap(e)) {
+					cantMove = true;
+					break;
+				}
 		}
-		if(!(cantMove||GameLogic.map.outOfField(x, y))){
-			x=nextX;
-			y=nextY;
-			angle=nextAngle;
+		if ( !GameLogic.map.outOfField(x, y)) {
+			x = prevX;
+			y = prevY;
+			angle = prevAngle;
 		}
 
 	}
@@ -163,7 +165,7 @@ public class Player extends Human {
 		// TODO Auto-generated method stub
 		move();
 		attack();
-
+		look.detectZone();
 	}
 
 	@Override
