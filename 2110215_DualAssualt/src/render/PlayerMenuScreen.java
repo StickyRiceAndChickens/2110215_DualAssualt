@@ -44,7 +44,7 @@ public class PlayerMenuScreen extends JPanel {
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 
 		JButton start = new JButton("START!");
-		// this.add(start);
+		 this.add(start);
 		start.addActionListener(new ActionListener() {
 
 			@Override
