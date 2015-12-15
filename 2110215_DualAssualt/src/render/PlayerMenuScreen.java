@@ -39,14 +39,13 @@ public class PlayerMenuScreen extends JPanel {
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 
 		JButton start = new JButton("START!");
-		this.add(start);
+		//this.add(start);
 		start.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				onNewGame();
-				GameManager.newGame();
 			}
 		});
 
@@ -63,6 +62,9 @@ public class PlayerMenuScreen extends JPanel {
 
 	protected void onNewGame() {
 		// TODO Auto-generated method stub
+		try{
+			
+		}catch(ReadyException e)
 		if (p1Ready && p2Ready) {
 			GameManager.p1.setImage(DrawingUtility.character[p1Select]);
 			GameManager.p2.setImage(DrawingUtility.character[p2Select]);
@@ -90,6 +92,8 @@ public class PlayerMenuScreen extends JPanel {
 			if (InputUtility.getKeyTriggered(KeyEvent.VK_NUMPAD2))
 				p2Ready = !p2Ready;
 			
+		
+
 	}
 
 	public void paintComponent(Graphics g) {
