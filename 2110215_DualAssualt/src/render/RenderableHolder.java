@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
@@ -14,7 +15,7 @@ public class RenderableHolder {
 	}
 	
 	public RenderableHolder(){
-		entities = new ArrayList<IRenderable>();
+		entities = new CopyOnWriteArrayList<IRenderable>();
 	}
 	
 	public void add(IRenderable entity){

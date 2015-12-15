@@ -129,6 +129,7 @@ public class GameScreen extends JPanel {
 		g2.clearRect(0, 0, (int) dim.getWidth(), (int) dim.getHeight());
 
 		// render all the objects
+	
 		for (IRenderable renderable :RenderableHolder.getInstance().getRenderableList()) {
 			if(renderable.isVisible())
 			renderable.draw(g2);

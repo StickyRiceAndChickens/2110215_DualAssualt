@@ -12,7 +12,6 @@ import render.SettingScreen;
 public class Map {
 	private static int[][] map;
 	private List<Entity> entities;
-	
 
 	public Map() {
 		map = new int[SettingScreen.screenWidth][SettingScreen.screenHeight - (SettingScreen.screenHeight / 5)];
@@ -45,21 +44,9 @@ public class Map {
 	}
 
 	public void addEntity(Entity e) {
-		ListIterator<Entity> iterator = this.entities.listIterator();
-		boolean marker = false;
 
-		if(entities.isEmpty())
-		    this.entities.add(e);
-		else {
-		   while (iterator.hasNext()) {
-		      if(((Entity) iterator.next()).isOverlapped(e) == false)
-		         marker = true;
-		   }
-		}
+		entities.add(e);
 
-		if (marker == true)
-		    entities.add(e);
-		it.add(e);
 		if (e instanceof Human) {
 			bookingEntityArea(e, ((Human) e).getID());
 		} else if (e instanceof MapObject) {
@@ -83,17 +70,20 @@ public class Map {
 		}
 	}
 
-	public void update() {
-		Iterator<Entity> ite = entities.iterator();
-		while (ite.hasNext()) {
-			Entity e = ite.next();
-			if (e.isDestroy()) {
-				removeEntity(e);
-				ite.remove();
+	public synchronized void update() {
+//		Iterator<Entity> ite = entities.iterator();
+//		while (ite.hasNext()) {
+//			Entity e = ite.next();
+		for(int i=0;i<entities.size();i++){
+			
+			if (entities.get(i).isDestroy()) {
+				removeEntity(entities.get(i));
+				entities.remove(i);
+				i--;
 
 			}
 		}
-
+		
 		for (int i = 0; i < entities.size(); i++) {
 			int tempX = entities.get(i).getX();
 			int tempY = entities.get(i).getY();
