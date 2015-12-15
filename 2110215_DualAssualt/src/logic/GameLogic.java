@@ -77,7 +77,7 @@ public class GameLogic {
 		Level level = new Level();
 		
 		readyToRender = true;
-		System.out.println("Map:");
+	//	System.out.println("Map:");
 		background.updateBackground();
 //		for(int h=0;h<SettingScreen.screenHeight/4;h++){
 //			for(int w=0;w<SettingScreen.screenWidth/4;w++){
@@ -106,6 +106,7 @@ public class GameLogic {
 		map.update();
 		
 		InputUtility.postUpdate();
+		
 
 	}
 

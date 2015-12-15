@@ -76,7 +76,7 @@ public class GameTitle extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				GameManager.goToPlayerMenu();
+				GameManager.newGame();
 //				GameManager.newGame();
 			}
 		});

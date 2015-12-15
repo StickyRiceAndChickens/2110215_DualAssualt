@@ -43,7 +43,7 @@ public class Map {
 			return -3;
 	}
 
-	public void addEntity(Entity e) {
+	public synchronized void addEntity(Entity e) {
 
 		entities.add(e);
 
@@ -55,13 +55,13 @@ public class Map {
 
 	}
 
-	private void removeEntity(Entity e) {
+	private synchronized void removeEntity(Entity e) {
 		if (e instanceof Human)
 			bookingEntityArea(e, 0);
 
 	}
 
-	private void bookingEntityArea(Entity e, int type) {
+	private synchronized void bookingEntityArea(Entity e, int type) {
 		for (int w = -e.getHeight() / 2; w < e.getHeight() / 2; w++) {
 			for (int h = -e.getWidth() / 2; h < e.getWidth() / 2; h++) {
 				map[e.getX() + w][e.getY() + h] = type;
@@ -95,7 +95,7 @@ public class Map {
 		}
 	}
 
-	void UpdateMovingEntity(Entity e, int tempX, int tempY) {
+	public synchronized void UpdateMovingEntity(Entity e, int tempX, int tempY) {
 		int type = 0;
 		for (int w = -e.getHeight(); w < e.getHeight(); w++) {
 			for (int h = -e.getWidth(); h < e.getWidth(); h++) {

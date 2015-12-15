@@ -12,7 +12,7 @@ public class Level {
 		int x = 500;
 		int y = 100;
 		while (enemyCount < 12) {
-			e1 = new Enemy(30, x, y, 70, 40, 180, null, 3, DrawingUtility.enemy1);
+			e1 = new Enemy(30, x, y, 70, 40, 180, null, 3+enemyCount, DrawingUtility.enemy1);
 			gun1 = new Gun(x, y, 0, e1, 3);
 			e1.setWeapon(gun1);
 			RenderableHolder.getInstance().add(e1);
