@@ -11,14 +11,13 @@ public class Bullet extends Weapon implements IRenderable {
 	private Human shooter;
 	private int power;
 	private int speed;
-	private double x, y;
+
 	private int hitAngle;
 
 	public Bullet(int x, int y, int angle, int power, int speed, Human shooter) {
 		super(x, y, 6, 6, angle);
 		// TODO Auto-generated constructor stub
-		this.x = (double) x;
-		this.y = (double) y;
+
 		this.power = power;
 		this.speed = speed;
 		this.shooter = shooter;
@@ -28,8 +27,8 @@ public class Bullet extends Weapon implements IRenderable {
 	public void move() {
 		// TODO Auto-generated method stub
 		if (!isDestroy()) {
-			x = (x + speed * Math.cos(Math.toRadians(angle)));
-			y = (y + speed * Math.sin(Math.toRadians(angle)));
+			x = (int) (x + speed * Math.cos(Math.toRadians(angle)));
+			y = (int) (y + speed * Math.sin(Math.toRadians(angle)));
 			if (GameLogic.map.outOfField((int) x, (int) y))
 				isDestroy = true;
 		}
@@ -40,16 +39,17 @@ public class Bullet extends Weapon implements IRenderable {
 
 		if (!this.isDestroy())
 			for (Entity e : GameLogic.map.getEntities()) {
-				if (isOverlap(e)) {
+				if (this.isOverlap(e)) {
 					if (e != shooter && e != shooter.getWeapon()) {
 						{
-							
-							this.isDestroy = true;
-							if (e instanceof Human) {
-								((Human) e).deceaseLife(power);
-								if (e instanceof Enemy)
-									((Enemy) e).setHitAngle(angle);
-								return true;
+							if (!(e instanceof LookingZone)) {
+								this.isDestroy = true;
+								if (e instanceof Human) {
+									((Human) e).deceaseLife(power);
+									if (e instanceof Enemy)
+										((Enemy) e).setHitAngle(angle);
+									return true;
+								}
 							}
 						}
 					}

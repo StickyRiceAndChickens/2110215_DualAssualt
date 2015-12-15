@@ -73,9 +73,7 @@ public class Enemy extends Human {
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
-		if (!isDestroy())
-			return isVisible;
-		else
+		
 			return !isDestroy();
 	}
 

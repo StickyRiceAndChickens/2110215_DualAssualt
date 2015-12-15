@@ -15,7 +15,7 @@ public class Player extends Human {
 	private int[] button;
 	private BufferedImage image;
 	private int speed = 3;
-	private LookingZone look;
+	//private LookingZone look;
 
 	public Player(int life, int x, int y, int width, int height, int angle, Weapon weapon, String name, int playerID,
 			BufferedImage image) {
@@ -27,7 +27,7 @@ public class Player extends Human {
 		defualtButton(playerID);
 		if (image != null)
 			this.image = DrawingUtility.resizeImage(image, image.getType(), width, height);
-		look = new LookingZone(this);
+		//look = new LookingZone(this);
 	}
 
 	public String getName() {
@@ -118,31 +118,31 @@ public class Player extends Human {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		int prevX = x;
-		int prevY = y;
-		int prevAngle = angle;
+		int nextX = x;
+		int nextY = y;
+		int nextAngle = angle;
 		
 		if (InputUtility.getKeyPressed(button[0])) {
 
-			y -= speed;
+			nextY -= speed;
 		}
 		if (InputUtility.getKeyPressed(button[1])) {
-			x -= speed;
+			nextX -= speed;
 		}
 		if (InputUtility.getKeyPressed(button[2])) {
-			y += speed;
+			nextY += speed;
 		}
 		if (InputUtility.getKeyPressed(button[3])) {
-			x += speed;
+			nextX += speed;
 		}
 		if (InputUtility.getKeyPressed(button[4])) {
-			angle -= 7;
-			if (angle < 0)
-				angle = 360;
+			nextAngle -= 7;
+			if (nextAngle < 0)
+				nextAngle = 360;
 		} else if (InputUtility.getKeyPressed(button[6])) {
-			angle += 7;
-			if (angle > 360)
-				angle = 0;
+			nextAngle += 7;
+			if (nextAngle > 360)
+				nextAngle = 0;
 		}
 		boolean cantMove = false;
 		for (Entity e : GameLogic.map.getEntities()) {
@@ -152,10 +152,10 @@ public class Player extends Human {
 					break;
 				}
 		}
-		if ( GameLogic.map.outOfField(x, y)) {
-			x = prevX;
-			y = prevY;
-			angle = prevAngle;
+		if (!( GameLogic.map.outOfField(nextX, nextY))) {
+			x = nextX;
+			y = nextY;
+			angle = nextAngle;
 		}
 
 	}
@@ -165,7 +165,7 @@ public class Player extends Human {
 		// TODO Auto-generated method stub
 		move();
 		attack();
-		look.detectZone();
+		
 	}
 
 	@Override
