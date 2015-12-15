@@ -39,13 +39,14 @@ public class PlayerMenuScreen extends JPanel {
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 
 		JButton start = new JButton("START!");
-		//this.add(start);
+		this.add(start);
 		start.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				onNewGame();
+				GameManager.newGame();
 			}
 		});
 
@@ -89,8 +90,6 @@ public class PlayerMenuScreen extends JPanel {
 			if (InputUtility.getKeyTriggered(KeyEvent.VK_NUMPAD2))
 				p2Ready = !p2Ready;
 			
-		
-
 	}
 
 	public void paintComponent(Graphics g) {

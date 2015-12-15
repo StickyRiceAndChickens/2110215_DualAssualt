@@ -26,6 +26,8 @@ public class DrawingUtility {
 	/* install image */
 	protected static final BufferedImage titleBG = getImage("res/img/bgTitle.png");
 	public static final BufferedImage playerImage = getImage("res/img/charingame2.png");
+	public static BufferedImage enemy1 = getImage("res/img/bot1.png");
+	public static BufferedImage enemy2 = getImage("res/img/bot2.png");
 	public static BufferedImage playerProfile = getImage("res/img/profile1.jpg");
 	public static BufferedImage bg = getImage("res/img/bgGrass.jpg");
 	public static BufferedImage newGame = DrawingUtility.getImage("res/img/buttonNewGame.png");

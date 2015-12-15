@@ -58,21 +58,23 @@ public class GameLogic {
 		RenderableHolder.getInstance().add(status);
 		RenderableHolder.getInstance().add(background);
 		
-		e1=new Enemy(30, 500, 200, 70, 40, 180, null, 3,DrawingUtility.playerImage);
-		gun3 = new Gun(500, 200, 0, e1, 3);
+//		e1=new Enemy(30, 500, 200, 70, 40, 180, null, 3,DrawingUtility.playerImage);
+//		gun3 = new Gun(500, 200, 0, e1, 3);
+//		
+//		e1.setWeapon(gun3);
+//		map.addEntity(e1);
+//		map.addEntity(gun3);
+//		RenderableHolder.getInstance().add(e1);
+//		
+//		e2=new Enemy(30, 100, 100, 70, 40, 0, null, 4,DrawingUtility.playerImage);
+//		gun4 = new Gun(100, 100, 0, e2, 3);
+//		
+//		e2.setWeapon(gun4);
+//		map.addEntity(e2);
+//		map.addEntity(gun4);
+//		RenderableHolder.getInstance().add(e2);
 		
-		e1.setWeapon(gun3);
-		map.addEntity(e1);
-		map.addEntity(gun3);
-		RenderableHolder.getInstance().add(e1);
-		
-		e2=new Enemy(30, 100, 100, 70, 40, 0, null, 4,DrawingUtility.playerImage);
-		gun4 = new Gun(100, 100, 0, e2, 3);
-		
-		e2.setWeapon(gun4);
-		map.addEntity(e2);
-		map.addEntity(gun4);
-		RenderableHolder.getInstance().add(e2);
+		Level level = new Level();
 		
 		readyToRender = true;
 		System.out.println("Map:");
