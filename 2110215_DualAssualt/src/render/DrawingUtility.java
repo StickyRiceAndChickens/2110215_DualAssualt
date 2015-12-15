@@ -48,7 +48,9 @@ public class DrawingUtility {
 			getImage("res/img/char3.png"), getImage("res/img/char4.png"), getImage("res/img/char5.png") };
 	public static BufferedImage[] characterIngame={ getImage("res/img/charingame1.png"), getImage("res/img/charingame2.png"),
 			getImage("res/img/charingame3.png"), getImage("res/img/charingame4.png"), getImage("res/img/charingame5.png") };
-
+	public static BufferedImage gun[] = {iconShotgun,iconRifle};
+	
+	
 	public static BufferedImage resizeImage(BufferedImage originalImage, int type, int newWidth, int newHeight) {
 		BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, type);
 		Graphics2D g = resizedImage.createGraphics();

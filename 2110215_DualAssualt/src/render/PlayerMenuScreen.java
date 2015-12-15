@@ -2,6 +2,7 @@ package render;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -25,10 +26,10 @@ public class PlayerMenuScreen extends JPanel {
 
 	private boolean p1Ready = false;
 	private boolean p2Ready = false;
-	private int p1Select = 0;
-	private int p2Select = 1;
-	private int g1Select=0;
-	private int g2Select=1;
+	public int p1Select = 0;
+	public int p2Select = 1;
+	public int g1Select=0;
+	public int g2Select=1;
 	JTextField p1Name,p2Name;
 	boolean isClick=false;
 
@@ -45,7 +46,7 @@ public class PlayerMenuScreen extends JPanel {
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 
 		JButton start = new JButton("START!");
-		 this.add(start);
+		
 		start.addActionListener(new ActionListener() {
 
 			@Override
@@ -74,12 +75,34 @@ public class PlayerMenuScreen extends JPanel {
 				280 * SettingScreen.screenWidth / 1280, 30);
 		p1Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
 		this.add(p1Name);
+		this.add(start);
 		this.add(p2Name);
 		p2Name.setText("Enter your Name");
 		p2Name.setBounds(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10,
 				280 * SettingScreen.screenWidth / 1280, 30);
 		p2Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
+		this.addKeyListener(new KeyListener() {
 
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				InputUtility.setKeyPressed(e.getKeyCode(), false);
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				InputUtility.setKeyPressed(e.getKeyCode(), true);
+				InputUtility.setKeyTriggered(e.getKeyCode(), true);
+				
+			}
+		});
 	}
 
 	protected void onNewGame() throws ReadyException{
@@ -119,16 +142,24 @@ public class PlayerMenuScreen extends JPanel {
 			if (p1Ready && p2Ready)
 				return;
 		}
-		if (InputUtility.getKeyTriggered(KeyEvent.VK_A))
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_A)) {
 			p1Select--;
-		if (InputUtility.getKeyTriggered(KeyEvent.VK_D))
+			if (p1Select < 0) p1Select = 4;
+		}
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_D)) {
 			p1Select++;
+			if (p1Select > 4) p1Select = 0;
+		}
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_H))
 			p1Ready = !p1Ready;
-		if (InputUtility.getKeyTriggered(KeyEvent.VK_LEFT))
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_LEFT)) {
 			p2Select--;
-		if (InputUtility.getKeyTriggered(KeyEvent.VK_RIGHT))
+			if (p2Select < 0) p2Select = 0;
+		}
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_RIGHT)) {
 			p2Select++;
+			if (p2Select > 4) p2Select = 0;
+		}
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_NUMPAD2))
 			p2Ready = !p2Ready;
 
@@ -163,6 +194,17 @@ public class PlayerMenuScreen extends JPanel {
 				280 * SettingScreen.screenWidth / 1280, 460 * SettingScreen.screenHeight / 720);
 		g2d.drawImage(image, null, (SettingScreen.screenWidth - 500) * SettingScreen.screenWidth / 1280,
 				90 * SettingScreen.screenHeight / 720);
+		
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgGunStatus, 2, 200, 140), null, 520, 100);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgGunStatus, 2, 200, 140), null, 560, 400);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.gun[g1Select], 2, 160, 110),null,530,110);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.gun[g2Select], 2, 160, 110),null,570,410);
+		
+		Font stringFont = new Font( "SansSerif", Font.PLAIN, 70 );
+		g2d.setColor(Color.GREEN);
+		g2d.setFont(stringFont);
+		if (!p1Ready) g2d.drawString("READY", 240*SettingScreen.screenWidth/1280, 600*SettingScreen.screenHeight/720);
+		if (!p2Ready) g2d.drawString("READY", 800*SettingScreen.screenWidth/1280, 600*SettingScreen.screenHeight/720);
 
 	}
 
