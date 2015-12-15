@@ -4,13 +4,17 @@ package render;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -23,8 +27,16 @@ public class SettingScreen extends JPanel {
 	public SettingScreen() {
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 		this.setLayout(new BorderLayout());
-		JPanel backPanel = new JPanel();
-		this.add(backPanel, BorderLayout.SOUTH);
+		
+		JPanel topPanel = new JPanel();
+		KeyPanel centerPanel = new KeyPanel();
+		JPanel bottomPanel = new JPanel();
+		
+		this.add(topPanel,BorderLayout.NORTH);
+		this.add(centerPanel,BorderLayout.CENTER);
+		this.add(bottomPanel,BorderLayout.SOUTH);
+		
+		
 		JButton back = new JButton("BACK!");
 		back.addActionListener(new ActionListener() {
 
@@ -34,12 +46,12 @@ public class SettingScreen extends JPanel {
 				GameManager.goToTitle();
 			}
 		});
-		backPanel.add(back, BorderLayout.WEST);
+		
 		JComboBox<String> res = new JComboBox<String>(resolution);
 		res.setPreferredSize(new Dimension(150, 20));
-		JPanel westPanel = new JPanel();
-		this.add(westPanel, BorderLayout.WEST);
-		westPanel.add(res, BorderLayout.CENTER);
+
+		topPanel.add(res);
+		
 
 		JButton apply = new JButton("Apply");
 		apply.addActionListener(new ActionListener() {
@@ -59,7 +71,8 @@ public class SettingScreen extends JPanel {
 				
 			}
 		});
-		westPanel.add(apply);
+		topPanel.add(apply);
+		bottomPanel.add(back);
 
 	}
 
@@ -70,6 +83,32 @@ public class SettingScreen extends JPanel {
 		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgSettingScreen, 2, screenWidth, screenHeight), null, 0,
 				0);
 
+	}
+	
+	public class KeyPanel extends JPanel {
+		public KeyPanel() {
+			JButton p1k1 = new JButton("LEFT");
+			p1k1.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					JFrame frame = new JFrame();
+					frame.setPreferredSize(new Dimension(100,100));
+					frame.setVisible(true);
+				}
+			});
+//			this.add(p1k1);
+		}
+		
+		protected void paintComponent(Graphics g) {
+			// TODO Auto-generated method stub
+			super.paintComponent(g);
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setBackground(Color.BLUE);
+			g2d.clearRect(0, 0, getWidth(), getHeight());
+			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgSettingScreen, 2, this.getWidth(), this.getHeight()),null,0,0);
+		}
 	}
 
 }
