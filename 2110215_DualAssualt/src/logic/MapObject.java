@@ -28,7 +28,7 @@ public class MapObject extends Entity implements IRenderable{
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
 		g2d.setColor(new Color(55,33,12));
-		g2d.drawRect(x-width/2, y-height/2, width, height);
+		g2d.fillRect(x-width/2, y-height/2, width, height);
 	}
 
 	@Override

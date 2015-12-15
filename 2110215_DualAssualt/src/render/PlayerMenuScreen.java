@@ -161,7 +161,7 @@ public class PlayerMenuScreen extends JPanel {
 			p1Ready = !p1Ready;
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_LEFT)) {
 			p2Select--;
-			if (p2Select < 0) p2Select = 0;
+			if (p2Select < 0) p2Select = 4;
 		}
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_RIGHT)) {
 			p2Select++;
