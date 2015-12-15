@@ -57,8 +57,8 @@ public abstract class Entity {
 	public boolean isOverlap(Entity e) {
 		if (e != this)
 			if (!(e instanceof LookingZone))
-				if (Math.abs(this.x - e.getX()) <= this.height + e.getHeight()) {
-					
+				if (Math.abs(this.x - e.getX()) <= this.width/2 + e.getWidth()/2) {
+					if (Math.abs(this.y - e.getY()) <= this.height/2 + e.getHeight()/2)
 						return true;
 					
 				}

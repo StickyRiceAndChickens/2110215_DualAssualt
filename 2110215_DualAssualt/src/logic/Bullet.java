@@ -43,6 +43,7 @@ public class Bullet extends Weapon implements IRenderable {
 				if (isOverlap(e)) {
 					if (e != shooter && e != shooter.getWeapon()) {
 						{
+							
 							this.isDestroy = true;
 							if (e instanceof Human) {
 								((Human) e).deceaseLife(power);

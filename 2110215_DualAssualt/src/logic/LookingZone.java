@@ -32,8 +32,8 @@ public class LookingZone extends Entity {
 			yi += Math.sin(Math.toRadians(angle));
 			for (Entity e : GameLogic.map.getEntities())
 				if (e != this)
-					if (Math.abs((int) xi - e.getX()) <= this.height + e.getHeight()) {
-						if (Math.abs((int) yi - e.getY()) <= this.height + e.getHeight()) {
+					if (Math.abs((int) xi - e.getX()) <=  xi+x+e.getHeight()) {
+						if (Math.abs((int) yi - e.getY()) <= yi+y+e.getHeight()) {
 							if(e instanceof Player)
 							return true;
 						}

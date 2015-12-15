@@ -152,7 +152,7 @@ public class Player extends Human {
 					break;
 				}
 		}
-		if ( !GameLogic.map.outOfField(x, y)) {
+		if ( GameLogic.map.outOfField(x, y)) {
 			x = prevX;
 			y = prevY;
 			angle = prevAngle;
