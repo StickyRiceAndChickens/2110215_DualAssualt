@@ -20,9 +20,10 @@ public class GameLogic {
 	// All renderable objects
 	private GameBackground background;
 	
-	private Enemy e1, e2;
-	private Gun gun1, gun2,gun3,gun4;
+	
+	private Gun gun1, gun2;
 	public static Map map;
+	public static int g1,g2;
 
 	
 
@@ -42,13 +43,13 @@ public class GameLogic {
 		background = new GameBackground();
 		map=new Map();
 		//set Player 1
-		gun1 = new Gun(800, 200, 0, GameManager.p1, 0);
+		gun1 = new Gun(800, 200, 0, GameManager.p1, g1);
 		GameManager.p1.setWeapon(gun1);
 		map.addEntity(GameManager.p1);
 		RenderableHolder.getInstance().add(GameManager.p1);
 		map.addEntity(gun1);
 		//set Player 2
-		gun2 = new Gun(700, 400, 0, GameManager.p2, 1);
+		gun2 = new Gun(700, 400, 0, GameManager.p2, g2);
 		GameManager.p2.setWeapon(gun2);
 		map.addEntity(GameManager.p2);
 		RenderableHolder.getInstance().add(GameManager.p2);

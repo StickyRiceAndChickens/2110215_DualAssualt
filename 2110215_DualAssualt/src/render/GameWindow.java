@@ -10,7 +10,7 @@ public class GameWindow extends JFrame{
 	protected GameWindow(JPanel scene){
 		super("Dual Assualt");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
+		
 		
 		
 		this.currentScene = scene;

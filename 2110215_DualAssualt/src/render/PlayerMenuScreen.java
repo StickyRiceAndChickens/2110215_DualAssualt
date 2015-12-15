@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import logic.GameLogic;
+
 @SuppressWarnings("serial")
 public class PlayerMenuScreen extends JPanel {
 
@@ -25,7 +27,9 @@ public class PlayerMenuScreen extends JPanel {
 	private boolean p2Ready = false;
 	private int p1Select = 0;
 	private int p2Select = 1;
-	JTextField p1Name;
+	private int g1Select=0;
+	private int g2Select=1;
+	JTextField p1Name,p2Name;
 
 	public int getP1Select() {
 		return p1Select;
@@ -51,14 +55,14 @@ public class PlayerMenuScreen extends JPanel {
 		});
 
 		p1Name = new JTextField();
-		JTextField p2Name = new JTextField();
+		p2Name = new JTextField();
 
 		p1Name.setText("Enter your Name");
 		p1Name.setBounds(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10,
 				280 * SettingScreen.screenWidth / 1280, 30);
 		p1Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
 		this.add(p1Name);
-		// this.add(p2Name);
+		 this.add(p2Name);
 
 	}
 
@@ -66,14 +70,35 @@ public class PlayerMenuScreen extends JPanel {
 		// TODO Auto-generated method stub
 		try {
 			if (p1Name.getText() == null)
-				throw new ReadyException(0);
+				throw new ReadyException(0,1);
 			else if(p1Name.getText().length()>16)
-				throw new ReadyException(3);
+				throw new ReadyException(2,1);
+			else if(!p1Ready)
+				throw new ReadyException(3,1);
+			else if (p2Name.getText() == null)
+				throw new ReadyException(0,2);
+			else if(p2Name.getText().length()>16)
+				throw new ReadyException(2,2);
+			else if(!p2Ready)
+				throw new ReadyException(3,2);
+			try{
+				String str=p1Name.getText().toString();
+			}catch(NumberFormatException e){
+				throw new ReadyException(1,1);
+			}
+			try{
+				String str=p2Name.getText().toString();
+			}catch(NumberFormatException e){
+				throw new ReadyException(1,2);
+			}
 		} catch (ReadyException e) {
-			if (p1Ready && p2Ready) {
+			
 				GameManager.p1.setImage(DrawingUtility.character[p1Select]);
 				GameManager.p2.setImage(DrawingUtility.character[p2Select]);
-			}
+				GameLogic.g1=g1Select;
+				GameLogic.g2=g2Select;
+				
+			
 		}
 	}
 

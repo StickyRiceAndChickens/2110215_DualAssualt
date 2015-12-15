@@ -10,7 +10,7 @@ public class TitleBackground implements IRenderable{
 	public static int imageHeight;
 	
 	public TitleBackground(){
-		this.titleBG = DrawingUtility.resizeImage(DrawingUtility.titleBG, 1, SettingScreen.screenWidth-300, SettingScreen.screenHeight);
+		this.titleBG = DrawingUtility.titleBG;
 	}
 	
 //	public static BufferedImage resizeImage(BufferedImage originalImage, int type) {
@@ -23,7 +23,7 @@ public class TitleBackground implements IRenderable{
 	
 	
 	public void draw(Graphics2D g2d) {
-		g2d.drawImage(titleBG, null, 300, 0);
+		g2d.drawImage(DrawingUtility.resizeImage(titleBG, 1, SettingScreen.screenWidth-300, SettingScreen.screenHeight), null, 300, 0);
 	}
 
 	@Override

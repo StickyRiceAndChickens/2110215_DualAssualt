@@ -1,5 +1,6 @@
 package render;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,26 +16,23 @@ public class GameManager {
 	private static GameTitle titleScene;
 	private static GameScreen gameScreen;
 	private static GameWindow gameWindow;
-	private static SettingScreen settingScreen;
 	private static PlayerMenuScreen playerMenuScreen;
+	private static SettingScreen settingScreen;
 	private static JPanel nextScene = null;
 
 	public static Player p1, p2;
 
 	public static void runGame(GameLogic gameLogic) {
 		titleScene = new GameTitle();
-		
-		p1 = new Player(50, 700, 400, 70, 40, 0, null, "Bigfer", 1,DrawingUtility.enemy1);
+
+		p1 = new Player(50, 700, 400, 70, 40, 0, null, "Bigfer", 1, DrawingUtility.enemy1);
 		p2 = new Player(50, 700, 400, 70, 40, 0, null, "เกรท", 2, DrawingUtility.enemy2);
 		playerMenuScreen = new PlayerMenuScreen();
-		
-		settingScreen = new SettingScreen();
-		
+
 		gameScreen = new GameScreen();
 
 		gameWindow = new GameWindow(titleScene);
-
-		
+		settingScreen = new SettingScreen();
 
 		while (true) {
 			try {
@@ -75,7 +73,22 @@ public class GameManager {
 	}
 
 	public static void resizeScreen() {
-		gameWindow.setSize(SettingScreen.screenWidth, SettingScreen.screenHeight);
+		gameWindow.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+		gameWindow.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+
+
+		titleScene.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+		titleScene.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+		
+		gameScreen.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+		gameScreen.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+
+		playerMenuScreen.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+		playerMenuScreen.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+		
+		settingScreen.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+		settingScreen.setSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
+		
 		titleScene.validate();
 	}
 }
