@@ -14,12 +14,15 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
+import java.util.jar.JarInputStream;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import logic.GameLogic;
+import logic.Player;
 
 @SuppressWarnings("serial")
 public class PlayerMenuScreen extends JPanel {
@@ -30,7 +33,7 @@ public class PlayerMenuScreen extends JPanel {
 	public int p2Select = 1;
 	public int g1Select=0;
 	public int g2Select=1;
-	JTextField p1Name,p2Name;
+	private String p1Name,p2Name;
 	boolean isClick=false;
 
 	public int getP1Select() {
@@ -53,34 +56,46 @@ public class PlayerMenuScreen extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				try {
+					onStart();
+					p1Name = JOptionPane.showInputDialog(PlayerMenuScreen.this, "Enter your p1name");
+					p2Name = JOptionPane.showInputDialog(PlayerMenuScreen.this, "Enter your p2name");
 					onNewGame();
-				} catch (ReadyException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				GameManager.p1.setImage(DrawingUtility.characterIngame[p1Select]);
+					GameManager.p1.setImage(DrawingUtility.characterIngame[p1Select]);
 
-				GameManager.p2.setImage(DrawingUtility.characterIngame[p2Select]);
-				GameLogic.g1=g1Select;
-				GameLogic.g2=g2Select;
-				GameManager.newGame();
+					GameManager.p2.setImage(DrawingUtility.characterIngame[p2Select]);
+					GameLogic.g1=g1Select;
+					GameLogic.g2=g2Select;
+					GameManager.p1.setName(p1Name);
+					GameManager.p2.setName(p2Name);
+					
+					GameManager.newGame();
+				} catch (NameInputException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(PlayerMenuScreen.this, e1.getMessage());
+				} catch (ReadyException e1) {
+					JOptionPane.showMessageDialog(PlayerMenuScreen.this, e1.getMessage());
+					GameManager.goToPlayerMenu();
+				}
 			}
 		});
-
-		p1Name = new JTextField();
-		p2Name = new JTextField();
-
-		p1Name.setText("Enter your Name");
-		p1Name.setBounds(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10,
-				280 * SettingScreen.screenWidth / 1280, 30);
-		p1Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
-		this.add(p1Name);
+		
 		this.add(start);
-		this.add(p2Name);
-		p2Name.setText("Enter your Name");
-		p2Name.setBounds(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10,
-				280 * SettingScreen.screenWidth / 1280, 30);
-		p2Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
+		
+//		p1Name = new JTextField();
+//		p2Name = new JTextField();
+//
+//		p1Name.setText("Enter your Name");
+//		
+//		p1Name.setBounds(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10,
+//				280 * SettingScreen.screenWidth / 1280, 30);
+//		p1Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
+//		this.add(p1Name);
+//		this.add(start);
+//		this.add(p2Name);
+//		p2Name.setText("Enter your Name");
+//		p2Name.setBounds(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10,
+//				280 * SettingScreen.screenWidth / 1280, 30);
+//		p2Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
 		this.addKeyListener(new KeyListener() {
 
 			@Override
@@ -105,33 +120,25 @@ public class PlayerMenuScreen extends JPanel {
 		});
 	}
 
-	protected void onNewGame() throws ReadyException{
+	
+	protected void onStart() throws ReadyException{
+		if(!p1Ready)
+			throw new ReadyException(1);
+		if(!p2Ready)
+			throw new ReadyException(2);
+	}
+	
+	protected void onNewGame() throws NameInputException{
 		// TODO Auto-generated method stub
 		
-			if (p1Name.getText() == null)
-				throw new ReadyException(0,1);
-			else if(p1Name.getText().length()>16)
-				throw new ReadyException(2,1);
-			else if(!p1Ready)
-				throw new ReadyException(3,1);
-			else if (p2Name.getText() == null)
-				throw new ReadyException(0,2);
-			else if(p2Name.getText().length()>16)
-				throw new ReadyException(2,2);
-			else if(!p2Ready)
-				throw new ReadyException(3,2);
-			try{
-				String str=p1Name.getText().toString();
-			}catch(NumberFormatException e){
-				throw new ReadyException(1,1);
-			}
-			try{
-				String str=p2Name.getText().toString();
-			}catch(NumberFormatException e){
-				throw new ReadyException(1,2);
-			}
-		
-		
+			if (p1Name.equals(""))
+				throw new NameInputException(0,1);
+			else if(p1Name.length()>6)
+				throw new NameInputException(2,1);
+			else if (p2Name.equals(""))
+				throw new NameInputException(0,2);
+			else if(p2Name.length()>6)
+				throw new NameInputException(2,2);
 	}
 
 	public void update() {
@@ -162,6 +169,25 @@ public class PlayerMenuScreen extends JPanel {
 		}
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_NUMPAD2))
 			p2Ready = !p2Ready;
+		
+		//gun
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_S)) {
+			g1Select--;
+			if (g1Select < 0) g1Select = 1;
+		}
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_W)) {
+			g1Select++;
+			if (g1Select > 1) g1Select = 0;
+		}
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_DOWN)) {
+			g2Select--;
+			if (g2Select < 0) g2Select = 1;
+		}
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_UP)) {
+			g2Select++;
+			if (g2Select > 1) g2Select = 0;
+		}
+		repaint();
 
 	}
 
@@ -203,8 +229,8 @@ public class PlayerMenuScreen extends JPanel {
 		Font stringFont = new Font( "SansSerif", Font.PLAIN, 70 );
 		g2d.setColor(Color.GREEN);
 		g2d.setFont(stringFont);
-		if (!p1Ready) g2d.drawString("READY", 240*SettingScreen.screenWidth/1280, 600*SettingScreen.screenHeight/720);
-		if (!p2Ready) g2d.drawString("READY", 800*SettingScreen.screenWidth/1280, 600*SettingScreen.screenHeight/720);
+		if (p1Ready) g2d.drawString("READY", 240*SettingScreen.screenWidth/1280, 600*SettingScreen.screenHeight/720);
+		if (p2Ready) g2d.drawString("READY", 800*SettingScreen.screenWidth/1280, 600*SettingScreen.screenHeight/720);
 
 	}
 
