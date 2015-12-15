@@ -31,7 +31,9 @@ public class DrawingUtility {
 	public static BufferedImage newGame = DrawingUtility.getImage("res/img/buttonNewGame.png");
 	public static BufferedImage newGame2 = DrawingUtility.getImage("res/img/buttonNewGameMouseOn.png");
 	public static BufferedImage setting = DrawingUtility.getImage("res/img/buttonSetting.png");
+	public static BufferedImage setting2 = DrawingUtility.getImage("res/img/buttonSettingMouseOn.png");
 	public static BufferedImage quit = DrawingUtility.getImage("res/img/buttonQuit.png");
+	public static BufferedImage quit2 = DrawingUtility.getImage("res/img/buttonQuitMouseOn.png");
 	public static BufferedImage statusBar = getImage("res/img/statusBar.png");
 	public static BufferedImage iconRifle = getImage("res/img/iconRifle.png");
 	public static BufferedImage iconShotgun = getImage("res/img/iconShotgun.png");

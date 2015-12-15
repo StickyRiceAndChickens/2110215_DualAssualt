@@ -98,13 +98,13 @@ public class GameTitle extends JPanel {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-
+				settingPanel.mouseEntered = false;
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-
+				settingPanel.mouseEntered = true;
 			}
 
 			@Override
@@ -132,13 +132,13 @@ public class GameTitle extends JPanel {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-
+				quitPanel.mouseEntered = false;
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-
+				quitPanel.mouseEntered = true;
 			}
 
 			@Override
@@ -246,6 +246,7 @@ public class GameTitle extends JPanel {
 	}
 
 	public class SettingPanel extends JPanel {
+		boolean mouseEntered = false;
 		@Override
 		protected void paintComponent(Graphics g) {
 			// TODO Auto-generated method stub
@@ -255,12 +256,16 @@ public class GameTitle extends JPanel {
 			g2d.clearRect(0, 0, getWidth(), getHeight());
 			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.getImage("res/img/bgSetting.png"), 2, 300,
 					SettingScreen.screenHeight / 6), null, 0, 0);
-			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.setting, 2, DrawingUtility.setting.getWidth() - 180,
-					DrawingUtility.setting.getHeight() - 40), null, 40, 20);
+			if (!mouseEntered)
+				g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.setting, 2, DrawingUtility.setting.getWidth() - 180,
+						DrawingUtility.setting.getHeight() - 40), null, 40, 20);
+			else g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.setting2, 2, DrawingUtility.setting2.getWidth() - 180,
+						DrawingUtility.setting2.getHeight() - 40), null, 40, 20);
 		}
 	}
 
 	public class QuitPanel extends JPanel {
+		boolean mouseEntered = false;
 		@Override
 		protected void paintComponent(Graphics g) {
 			// TODO Auto-generated method stub
@@ -270,8 +275,11 @@ public class GameTitle extends JPanel {
 			g2d.clearRect(0, 0, getWidth(), getHeight());
 			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.getImage("res/img/bgQuit.png"), 2, 300,
 					SettingScreen.screenHeight / 6), null, 0, 0);
-			g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.quit, 2, DrawingUtility.quit.getWidth() - 180,
-					DrawingUtility.quit.getHeight() - 40), null, 40, 0);
+			if (!mouseEntered)
+				g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.quit, 2, DrawingUtility.quit.getWidth() - 180,
+						DrawingUtility.quit.getHeight() - 40), null, 40, 0);
+			else g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.quit2, 2, DrawingUtility.quit2.getWidth() - 180,
+					DrawingUtility.quit2.getHeight() - 40), null, 40, 0);
 		}
 	}
 
