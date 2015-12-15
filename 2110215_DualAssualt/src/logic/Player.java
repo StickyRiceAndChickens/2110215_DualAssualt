@@ -148,7 +148,7 @@ public class Player extends Human {
 		for (Entity e : GameLogic.map.getEntities()) {
 			if (e instanceof Human || e instanceof MapObject)
 				if(e!=this)
-				if (Math.abs(nextX - e.getX()) <= this.width / 2 + e.getWidth() / 2) {
+				if (Math.abs(nextX - e.getX()) <= this.height / 2 + e.getWidth() / 2) {
 					if (Math.abs(nextY - e.getY()) <= this.height / 2 + e.getHeight() / 2) {
 						cantMove = true;
 						break;

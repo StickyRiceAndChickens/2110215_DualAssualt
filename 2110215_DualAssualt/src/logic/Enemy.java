@@ -35,11 +35,10 @@ public class Enemy extends Human {
 		this.image = DrawingUtility.resizeImage(image, image.getType(), width, height);
 		;
 	}
-
+	
 	public boolean getHit() {
 		if (prevLife > life) {
 			prevLife = life;
-			
 			return true;
 		} else
 			return false;
