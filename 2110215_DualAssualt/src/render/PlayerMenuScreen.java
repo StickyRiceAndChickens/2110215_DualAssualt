@@ -30,6 +30,7 @@ public class PlayerMenuScreen extends JPanel {
 	private int g1Select=0;
 	private int g2Select=1;
 	JTextField p1Name,p2Name;
+	boolean isClick=false;
 
 	public int getP1Select() {
 		return p1Select;
@@ -50,7 +51,18 @@ public class PlayerMenuScreen extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				onNewGame();
+				try {
+					onNewGame();
+				} catch (ReadyException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				GameManager.p1.setImage(DrawingUtility.characterIngame[p1Select]);
+
+				GameManager.p2.setImage(DrawingUtility.characterIngame[p2Select]);
+				GameLogic.g1=g1Select;
+				GameLogic.g2=g2Select;
+				GameManager.newGame();
 			}
 		});
 
@@ -62,13 +74,17 @@ public class PlayerMenuScreen extends JPanel {
 				280 * SettingScreen.screenWidth / 1280, 30);
 		p1Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
 		this.add(p1Name);
-		 this.add(p2Name);
+		this.add(p2Name);
+		p2Name.setText("Enter your Name");
+		p2Name.setBounds(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10,
+				280 * SettingScreen.screenWidth / 1280, 30);
+		p2Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
 
 	}
 
-	protected void onNewGame() {
+	protected void onNewGame() throws ReadyException{
 		// TODO Auto-generated method stub
-		try {
+		
 			if (p1Name.getText() == null)
 				throw new ReadyException(0,1);
 			else if(p1Name.getText().length()>16)
@@ -91,15 +107,8 @@ public class PlayerMenuScreen extends JPanel {
 			}catch(NumberFormatException e){
 				throw new ReadyException(1,2);
 			}
-		} catch (ReadyException e) {
-			
-				GameManager.p1.setImage(DrawingUtility.character[p1Select]);
-				GameManager.p2.setImage(DrawingUtility.character[p2Select]);
-				GameLogic.g1=g1Select;
-				GameLogic.g2=g2Select;
-				
-			
-		}
+		
+		
 	}
 
 	public void update() {
