@@ -25,12 +25,25 @@ public class Player extends Human {
 
 		this.button = new int[7];
 		defualtButton(playerID);
-		this.image = DrawingUtility.resizeImage(image, image.getType(), width, height);
+		if (image != null)
+			this.image = DrawingUtility.resizeImage(image, image.getType(), width, height);
 		look = new LookingZone(this);
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public void setButton(int[] button) {
+		this.button = button;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 
 	public void setName(String name) {
@@ -129,7 +142,7 @@ public class Player extends Human {
 			if (angle > 360)
 				angle = 0;
 		}
-		
+
 		try {
 			GameLogic.map.UpdateMovingEntity(this, x, y);
 		} catch (ArrayIndexOutOfBoundsException e) {
@@ -137,7 +150,7 @@ public class Player extends Human {
 			y = tempY;
 		}
 		look.update();
-		
+
 	}
 
 	@Override

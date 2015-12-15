@@ -9,6 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import render.DrawingUtility;
 import render.GameBackground;
+import render.GameManager;
 import render.IRenderable;
 import render.InputUtility;
 import render.RenderableHolder;
@@ -18,7 +19,7 @@ public class GameLogic {
 
 	// All renderable objects
 	private GameBackground background;
-	private Player p1, p2;
+	
 	private Enemy e1, e2;
 	private Gun gun1, gun2,gun3,gun4;
 	public static Map map;
@@ -40,20 +41,20 @@ public class GameLogic {
 	public synchronized void onStart() {
 		background = new GameBackground();
 		map=new Map();
-		p1 = new Player(50, 800, 200, 70, 40, 0, null, "BF", 1, DrawingUtility.playerImage);
-		gun1 = new Gun(800, 200, 0, p1, 0);
-		p1.setWeapon(gun1);
-		p2 = new Player(50, 700, 400, 70, 40, 0, null, "BF", 2, DrawingUtility.playerImage);
-		gun2 = new Gun(700, 400, 0, p2, 1);
-		
-		p2.setWeapon(gun2);
-		map.addEntity(p1);
+		//set Player 1
+		gun1 = new Gun(800, 200, 0, GameManager.p1, 0);
+		GameManager.p1.setWeapon(gun1);
+		map.addEntity(GameManager.p1);
+		RenderableHolder.getInstance().add(GameManager.p1);
 		map.addEntity(gun1);
-		RenderableHolder.getInstance().add(p1);
-		map.addEntity(p2);
+		//set Player 2
+		gun2 = new Gun(700, 400, 0, GameManager.p2, 1);
+		GameManager.p2.setWeapon(gun2);
+		map.addEntity(GameManager.p2);
+		RenderableHolder.getInstance().add(GameManager.p2);
 		map.addEntity(gun2);
-		RenderableHolder.getInstance().add(p2);
-		GameStatusBar status = new GameStatusBar(p1, p2);
+		//status bar
+		GameStatusBar status = new GameStatusBar(GameManager.p1, GameManager.p2);
 		RenderableHolder.getInstance().add(status);
 		RenderableHolder.getInstance().add(background);
 		
@@ -76,12 +77,12 @@ public class GameLogic {
 		readyToRender = true;
 		System.out.println("Map:");
 		background.updateBackground();
-		for(int h=0;h<SettingScreen.screenHeight/4;h++){
-			for(int w=0;w<SettingScreen.screenWidth/4;w++){
-				System.out.print(map.getTerrainAt(w, h));
-			}
-			System.out.println();
-		}
+//		for(int h=0;h<SettingScreen.screenHeight/4;h++){
+//			for(int w=0;w<SettingScreen.screenWidth/4;w++){
+//				System.out.print(map.getTerrainAt(w, h));
+//			}
+//			System.out.println();
+//		}
 	}
 
 	// Called after exit the game loop

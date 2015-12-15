@@ -24,7 +24,16 @@ public class PlayerMenuScreen extends JPanel {
 	private boolean p1Ready = false;
 	private boolean p2Ready = false;
 	private int p1Select = 0; 
-	private int p2Select = 0;
+	private int p2Select = 1;
+	public int getP1Select() {
+		return p1Select;
+	}
+
+	public int getP2Select() {
+		return p2Select;
+	}
+
+	
 	
 	public PlayerMenuScreen(){
 		
@@ -37,7 +46,7 @@ public class PlayerMenuScreen extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				GameManager.newGame();
+				onNewGame();
 			}
 		});
 		
@@ -52,6 +61,14 @@ public class PlayerMenuScreen extends JPanel {
 		
 	}
 	
+	protected void onNewGame() {
+		// TODO Auto-generated method stub
+		if(p1Ready&&p2Ready){
+			GameManager.p1.setImage(DrawingUtility.character[p1Select]);
+			GameManager.p2.setImage(DrawingUtility.character[p2Select]);
+		}
+	}
+
 	public void update() {
 		while (true) {
 		try {
@@ -65,6 +82,7 @@ public class PlayerMenuScreen extends JPanel {
 			if (InputUtility.getKeyTriggered(KeyEvent.VK_NUMPAD2)) p2Ready = !p2Ready;
 			if (p1Ready && p2Ready) return;
 		}
+		
 	}
 		
 	}
@@ -84,7 +102,7 @@ public class PlayerMenuScreen extends JPanel {
 		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgChar, 2, 280*SettingScreen.screenWidth/1280, 460*SettingScreen.screenHeight/720), null, 220*SettingScreen.screenWidth/1280, 90*SettingScreen.screenHeight/720);
 		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgChar, 2, 280*SettingScreen.screenWidth/1280, 460*SettingScreen.screenHeight/720), null, (SettingScreen.screenWidth-500)*SettingScreen.screenWidth/1280, 90*SettingScreen.screenHeight/720);
 		
-		g2d.drawImage(DrawingUtility.character[p1Select], null, 0, 0);
+		g2d.drawImage(DrawingUtility.character[p1Select], null, 280*SettingScreen.screenWidth/1280, 460*SettingScreen.screenHeight/720);
 		g2d.drawImage(DrawingUtility.character[p2Select], null, 0, 0);
 		
 		

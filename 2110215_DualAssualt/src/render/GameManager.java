@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import logic.GameLogic;
+import logic.Player;
 
 
 public class GameManager {
@@ -20,6 +21,8 @@ public class GameManager {
 	private static PlayerMenuScreen playerMenuScreen;
 	private static JPanel nextScene = null;
 	
+	public static Player p1,p2;
+	
 	public static void runGame(GameLogic gameLogic){
 		titleScene = new GameTitle();
 		
@@ -28,6 +31,7 @@ public class GameManager {
 		gameScreen = new GameScreen();
 		
 		gameWindow = new GameWindow(titleScene);
+		p1 = new Player(50, 700, 400, 70, 40, 0, null, null, 1,null);
 		
 		while(true){
 			try {
