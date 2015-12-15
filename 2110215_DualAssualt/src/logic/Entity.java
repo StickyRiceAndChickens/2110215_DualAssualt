@@ -58,9 +58,9 @@ public abstract class Entity {
 		if (e != this)
 			if (!(e instanceof LookingZone))
 				if (Math.abs(this.x - e.getX()) <= this.height + e.getHeight()) {
-					if (Math.abs(this.y - e.getY()) <= this.height + e.getHeight()) {
+					
 						return true;
-					}
+					
 				}
 		return false;
 	}
