@@ -25,6 +25,7 @@ public class PlayerMenuScreen extends JPanel {
 	private boolean p2Ready = false;
 	private int p1Select = 0;
 	private int p2Select = 1;
+	JTextField p1Name;
 
 	public int getP1Select() {
 		return p1Select;
@@ -39,7 +40,7 @@ public class PlayerMenuScreen extends JPanel {
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
 
 		JButton start = new JButton("START!");
-		//this.add(start);
+		// this.add(start);
 		start.addActionListener(new ActionListener() {
 
 			@Override
@@ -49,50 +50,53 @@ public class PlayerMenuScreen extends JPanel {
 			}
 		});
 
-		JTextField p1Name = new JTextField();
+		p1Name = new JTextField();
 		JTextField p2Name = new JTextField();
-		
+
 		p1Name.setText("Enter your Name");
-		p1Name.setBounds(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720+10,280 * SettingScreen.screenWidth / 1280, 30);
-		p1Name.setLocation(280 * SettingScreen.screenWidth / 1280,550 * SettingScreen.screenHeight / 720+10);
+		p1Name.setBounds(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10,
+				280 * SettingScreen.screenWidth / 1280, 30);
+		p1Name.setLocation(280 * SettingScreen.screenWidth / 1280, 550 * SettingScreen.screenHeight / 720 + 10);
 		this.add(p1Name);
-		//this.add(p2Name);
+		// this.add(p2Name);
 
 	}
 
 	protected void onNewGame() {
 		// TODO Auto-generated method stub
-		try{
-			
-		}catch(ReadyException e)
-		if (p1Ready && p2Ready) {
-			GameManager.p1.setImage(DrawingUtility.character[p1Select]);
-			GameManager.p2.setImage(DrawingUtility.character[p2Select]);
+		try {
+			if (p1Name.getText() == null)
+				throw new ReadyException(0);
+			else if(p1Name.getText().length()>16)
+				throw new ReadyException(3);
+		} catch (ReadyException e) {
+			if (p1Ready && p2Ready) {
+				GameManager.p1.setImage(DrawingUtility.character[p1Select]);
+				GameManager.p2.setImage(DrawingUtility.character[p2Select]);
+			}
 		}
 	}
 
 	public void update() {
-		
-			try {
-				Thread.sleep(20);
-			} catch (InterruptedException e) {
-				if (p1Ready && p2Ready)
-					return;
-			}
-			if (InputUtility.getKeyTriggered(KeyEvent.VK_A))
-				p1Select--;
-			if (InputUtility.getKeyTriggered(KeyEvent.VK_D))
-				p1Select++;
-			if (InputUtility.getKeyTriggered(KeyEvent.VK_H))
-				p1Ready = !p1Ready;
-			if (InputUtility.getKeyTriggered(KeyEvent.VK_LEFT))
-				p2Select--;
-			if (InputUtility.getKeyTriggered(KeyEvent.VK_RIGHT))
-				p2Select++;
-			if (InputUtility.getKeyTriggered(KeyEvent.VK_NUMPAD2))
-				p2Ready = !p2Ready;
-			
-		
+
+		try {
+			Thread.sleep(20);
+		} catch (InterruptedException e) {
+			if (p1Ready && p2Ready)
+				return;
+		}
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_A))
+			p1Select--;
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_D))
+			p1Select++;
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_H))
+			p1Ready = !p1Ready;
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_LEFT))
+			p2Select--;
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_RIGHT))
+			p2Select++;
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_NUMPAD2))
+			p2Ready = !p2Ready;
 
 	}
 
@@ -123,7 +127,8 @@ public class PlayerMenuScreen extends JPanel {
 		g2d.drawImage(image, null, 220 * SettingScreen.screenWidth / 1280, 90 * SettingScreen.screenHeight / 720);
 		image = DrawingUtility.resizeImage(DrawingUtility.character[p2Select], 2,
 				280 * SettingScreen.screenWidth / 1280, 460 * SettingScreen.screenHeight / 720);
-		g2d.drawImage(image, null,  (SettingScreen.screenWidth-500)*SettingScreen.screenWidth/1280, 90 * SettingScreen.screenHeight / 720);
+		g2d.drawImage(image, null, (SettingScreen.screenWidth - 500) * SettingScreen.screenWidth / 1280,
+				90 * SettingScreen.screenHeight / 720);
 
 	}
 
