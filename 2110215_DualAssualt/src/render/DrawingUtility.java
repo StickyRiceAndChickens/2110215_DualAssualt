@@ -38,7 +38,7 @@ public class DrawingUtility {
 	public static BufferedImage iconRifle = getImage("res/img/iconRifle.png");
 	public static BufferedImage iconShotgun = getImage("res/img/iconShotgun.png");
 	public static BufferedImage bgGunStatus = getImage("res/img/bgGunStatus.jpg");
-	public static BufferedImage bgChar = getImage("res/img/bgChar.jpg");
+	public static BufferedImage bgChar = getImage("res/img/bgChar.png");
 	public static BufferedImage bgPlayerMenu = getImage("res/img/bgPlayerMenu.png");
 
 	public static BufferedImage resizeImage(BufferedImage originalImage, int type, int newWidth, int newHeight) {

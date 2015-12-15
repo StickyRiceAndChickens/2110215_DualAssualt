@@ -150,6 +150,8 @@ public class PlayerMenuScreen extends JPanel {
 		g2d.clearRect(0, 0, (int) dim.getWidth(), (int) dim.getHeight());
 				
 		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgPlayerMenu, 2, SettingScreen.screenWidth, SettingScreen.screenHeight), null, 0, 0);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgChar, 2, 280*SettingScreen.screenWidth/1280, 460*SettingScreen.screenHeight/720), null, 220*SettingScreen.screenWidth/1280, 90*SettingScreen.screenHeight/720);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgChar, 2, 280*SettingScreen.screenWidth/1280, 460*SettingScreen.screenHeight/720), null, (SettingScreen.screenWidth-500)*SettingScreen.screenWidth/1280, 90*SettingScreen.screenHeight/720);
 		
 //		if (InputUtility.getKeyTriggered(KeyEvent.VK_A)) currentChar = 
 		
