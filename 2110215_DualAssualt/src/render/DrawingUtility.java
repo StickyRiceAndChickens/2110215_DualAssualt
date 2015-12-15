@@ -41,7 +41,8 @@ public class DrawingUtility {
 	public static BufferedImage iconShotgun = getImage("res/img/iconShotgun.png");
 	public static BufferedImage bgGunStatus = getImage("res/img/bgGunStatus.jpg");
 	public static BufferedImage bgChar = getImage("res/img/bgChar.png");
-	public static BufferedImage bgPlayerMenu = getImage("res/img/bgPlayerMenu.png");
+	public static BufferedImage bgPlayerMenu = getImage("res/img/bgSettingScreen.jpg");
+	public static BufferedImage bgSettingScreen = getImage("res/img/bgSettingScreen.jpg");
 
 	public static BufferedImage character[] = { getImage("res/img/char1.png"), getImage("res/img/char2.png"),
 			getImage("res/img/char3.png"), getImage("res/img/char4.png"), getImage("res/img/char5.png") };

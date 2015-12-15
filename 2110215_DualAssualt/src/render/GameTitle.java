@@ -111,6 +111,7 @@ public class GameTitle extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				// go to settingScreen
+				GameManager.goToSetting();
 			}
 		});
 		settingPanel.setPreferredSize(new Dimension(300, 100));

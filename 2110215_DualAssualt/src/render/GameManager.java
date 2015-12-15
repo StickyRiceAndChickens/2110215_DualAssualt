@@ -27,7 +27,8 @@ public class GameManager {
 		p1 = new Player(50, 700, 400, 70, 40, 0, null, "Bigfer", 1,DrawingUtility.enemy1);
 		p2 = new Player(50, 700, 400, 70, 40, 0, null, "เกรท", 2, DrawingUtility.enemy2);
 		playerMenuScreen = new PlayerMenuScreen();
-
+		
+		settingScreen = new SettingScreen();
 		
 		gameScreen = new GameScreen();
 
