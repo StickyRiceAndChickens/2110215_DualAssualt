@@ -211,27 +211,39 @@ public class PlayerMenuScreen extends JPanel {
 		g2d.drawImage(
 				DrawingUtility.resizeImage(DrawingUtility.bgChar, 2, 280 * SettingScreen.screenWidth / 1280,
 						460 * SettingScreen.screenHeight / 720),
-				null, (SettingScreen.screenWidth - 500) * SettingScreen.screenWidth / 1280,
+				null, 780 * SettingScreen.screenWidth / 1280,
 				90 * SettingScreen.screenHeight / 720);
 		BufferedImage image = DrawingUtility.resizeImage(DrawingUtility.character[p1Select], 2,
 				280 * SettingScreen.screenWidth / 1280, 460 * SettingScreen.screenHeight / 720);
 		g2d.drawImage(image, null, 220 * SettingScreen.screenWidth / 1280, 90 * SettingScreen.screenHeight / 720);
 		image = DrawingUtility.resizeImage(DrawingUtility.character[p2Select], 2,
 				280 * SettingScreen.screenWidth / 1280, 460 * SettingScreen.screenHeight / 720);
-		g2d.drawImage(image, null, (SettingScreen.screenWidth - 500) * SettingScreen.screenWidth / 1280,
+		g2d.drawImage(image, null, 780 * SettingScreen.screenWidth / 1280,
 				90 * SettingScreen.screenHeight / 720);
 		
-		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgGunStatus, 2, 200, 140), null, 520, 100);
-		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgGunStatus, 2, 200, 140), null, 560, 400);
-		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.gun[g1Select], 2, 160, 110),null,530,110);
-		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.gun[g2Select], 2, 160, 110),null,570,410);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgGunStatus, 2, 200, 140), null, 520*SettingScreen.screenWidth/1280, 100*SettingScreen.screenHeight/720);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgGunStatus, 2, 200, 140), null, 560*SettingScreen.screenWidth/1280, 400*SettingScreen.screenHeight/720);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.gun[g1Select], 2, 160, 110),null,530*SettingScreen.screenWidth/1280,110*SettingScreen.screenHeight/720);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.gun[g2Select], 2, 160, 110),null,570*SettingScreen.screenWidth/1280,410*SettingScreen.screenHeight/720);
 		
+		Font stringFont3 = new Font( "SansSerif", Font.PLAIN, 30 );
+		g2d.setColor(Color.RED);
+		g2d.setFont(stringFont3);
+		if (!p1Ready) g2d.drawString("Press h for READY", 240*SettingScreen.screenWidth/1280, 590*SettingScreen.screenHeight/720);
+		if (!p2Ready) g2d.drawString("Press 2 for READY", 800*SettingScreen.screenWidth/1280, 590*SettingScreen.screenHeight/720);
 		Font stringFont = new Font( "SansSerif", Font.PLAIN, 70 );
 		g2d.setColor(Color.GREEN);
 		g2d.setFont(stringFont);
-		if (p1Ready) g2d.drawString("READY", 240*SettingScreen.screenWidth/1280, 600*SettingScreen.screenHeight/720);
-		if (p2Ready) g2d.drawString("READY", 800*SettingScreen.screenWidth/1280, 600*SettingScreen.screenHeight/720);
+		if (p1Ready) g2d.drawString("READY", 240*SettingScreen.screenWidth/1280, 620*SettingScreen.screenHeight/720);
+		if (p2Ready) g2d.drawString("READY", 800*SettingScreen.screenWidth/1280, 620*SettingScreen.screenHeight/720);
+		
 
+		Font stringFont2 = new Font( "SansSerif", Font.PLAIN, 20 );
+		g2d.setColor(Color.YELLOW);
+		g2d.setFont(stringFont2);
+		g2d.drawString("Player1 : Press A or D to Select Character and W or S to Select Gun", 20, 650*SettingScreen.screenHeight/720);
+		g2d.drawString("Player2 : Press LEFT or RIGHT to Select Character and UP or DOWN to Select Gun", 20, 680*SettingScreen.screenHeight/720);
+		
 	}
 
 	// private void defualtButton(int playerID) {
