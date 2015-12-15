@@ -11,6 +11,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -19,9 +21,10 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class PlayerMenuScreen extends JPanel {
 	
-	public boolean p1Ready = false;
-	public boolean p2Ready = false;
-	private int[] button;
+	private boolean p1Ready = false;
+	private boolean p2Ready = false;
+	private int p1Select = 0; 
+	private int p2Select = 0;
 	
 	public PlayerMenuScreen(){
 		
@@ -47,95 +50,23 @@ public class PlayerMenuScreen extends JPanel {
 		this.add(p1Name);
 		this.add(p2Name);
 		
-		this.addListener();
-		
 	}
 	
-	
-	private void addListener() {
-		/* fill code listener1 */
-		this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				InputUtility.setMouseLeftDown(false);
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					// label.setText("Detected Mouse Left Click!");
-					InputUtility.setMouseLeftDown(true);
-					InputUtility.setMouseLeftTriggered(true);
-				} else if (e.getButton() == MouseEvent.BUTTON3) {
-					// label.setText("Detected Mouse Right Click!");
-				}
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				InputUtility.setMouseOnScreen(false);
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				InputUtility.setMouseOnScreen(true);
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		/* fill code listener2 */
-		this.addMouseMotionListener(new MouseMotionListener() {
-
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (InputUtility.isMouseOnScreen()) {
-					InputUtility.setMouseX(e.getX());
-					InputUtility.setMouseY(e.getY());
-				}
-			}
-
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (InputUtility.isMouseOnScreen()) {
-					InputUtility.setMouseX(e.getX());
-					InputUtility.setMouseY(e.getY());
-				}
-			}
-		});
-		/* fill code listener3 */
-		this.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				InputUtility.setKeyPressed(e.getKeyCode(), false);
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				InputUtility.setKeyPressed(e.getKeyCode(), true);
-				InputUtility.setKeyTriggered(e.getKeyCode(), true);
-				
-			}
-		});
+	public void update() {
+		while (true) {
+		try {
+			Thread.sleep(20);
+		} catch (InterruptedException e) {
+			if (InputUtility.getKeyTriggered(KeyEvent.VK_A)) p1Select--;
+			if (InputUtility.getKeyTriggered(KeyEvent.VK_D)) p1Select++;
+			if (InputUtility.getKeyTriggered(KeyEvent.VK_H)) p1Ready = !p1Ready;
+			if (InputUtility.getKeyTriggered(KeyEvent.VK_LEFT)) p2Select--;
+			if (InputUtility.getKeyTriggered(KeyEvent.VK_RIGHT)) p2Select++;
+			if (InputUtility.getKeyTriggered(KeyEvent.VK_NUMPAD2)) p2Ready = !p2Ready;
+			if (p1Ready && p2Ready) return;
+		}
+	}
+		
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -153,7 +84,10 @@ public class PlayerMenuScreen extends JPanel {
 		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgChar, 2, 280*SettingScreen.screenWidth/1280, 460*SettingScreen.screenHeight/720), null, 220*SettingScreen.screenWidth/1280, 90*SettingScreen.screenHeight/720);
 		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.bgChar, 2, 280*SettingScreen.screenWidth/1280, 460*SettingScreen.screenHeight/720), null, (SettingScreen.screenWidth-500)*SettingScreen.screenWidth/1280, 90*SettingScreen.screenHeight/720);
 		
-//		if (InputUtility.getKeyTriggered(KeyEvent.VK_A)) currentChar = 
+		g2d.drawImage(DrawingUtility.character[p1Select], null, 0, 0);
+		g2d.drawImage(DrawingUtility.character[p2Select], null, 0, 0);
+		
+		
 		
 	}
 	
