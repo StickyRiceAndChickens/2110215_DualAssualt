@@ -6,57 +6,63 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import render.IRenderable;
+import render.SettingScreen;
 
-public class LookingZone {
+public class LookingZone extends Entity {
 
 	int x, y, angle, id;
 	Human human;
 
 	public LookingZone(Human human) {
-
+		super(human.getX(), human.getY(), SettingScreen.screenHeight / 2, SettingScreen.screenHeight / 2,
+				human.getID());
 		// TODO Auto-generated constructor stub
 		this.human = human;
-		this.x = human.getX();
-		this.y = human.getY();
+
 		this.angle = human.getAngle();
-		this.id = human.getID();
+
 	}
 
-	public int checkLooking(int angle) {
+	public boolean checkLooking(int angle) {
 		// Game;
 		double xi = x, yi = y;
-		int map = 0;
-		while (map == 0 || map == id) {
+		
+		while (!GameLogic.map.outOfField((int)xi,(int) yi)) {
 			xi += Math.cos(Math.toRadians(angle));
 			yi += Math.sin(Math.toRadians(angle));
-			map = GameLogic.map.getTerrainAt((int) xi, (int) yi);
+			for (Entity e : GameLogic.map.getEntities())
+				if (e != this)
+					if (Math.abs((int) xi - e.getX()) <= this.height + e.getHeight()) {
+						if (Math.abs((int) yi - e.getY()) <= this.height + e.getHeight()) {
+							if(e instanceof Player)
+							return true;
+						}
+					}
 
 		}
-		// System.out.println("look" + " :" + map + "at x:" + xi + " y:" + yi +
-		// " map:"
-		// + GameLogic.map.getTerrainAt((int) xi, (int) yi));
-		return map;
+
+		return false;
 
 	}
-	
-	
-	public List<Integer> detectZone(int lookingRange, int angle) {
-		List<Integer> detectIds = new CopyOnWriteArrayList();
-		for (int angleI = -lookingRange; angleI <= lookingRange; angleI++) {
-			int tmpCheck = checkLooking(angle + angleI);
-			if (tmpCheck !=-3 && tmpCheck != 0) {
-				
-				detectIds.add(tmpCheck);
-//				if (missAngle == 0)
-//					missAngle = angle + angleI;
+
+	public boolean detectZone() {
+
+		for (Entity e : GameLogic.map.getEntities()) {
+			if (isOverlap(e)) {
+				if (human instanceof Enemy) {
+					if (e instanceof Player) {
+						return true;
+					}
+				}
+				else if(human instanceof Player){
+					if(e instanceof Enemy){
+						((Enemy) e).setVisible(true);
+
+					}
+				}
 			}
-			
 		}
-		
-//		if(human instanceof Enemy){
-//			((Enemy) human).setMissAngle(missAngle);
-//		}
-		return detectIds;
+		return false;
 	}
 
 	public void update() {

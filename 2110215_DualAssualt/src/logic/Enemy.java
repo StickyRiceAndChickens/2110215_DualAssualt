@@ -17,6 +17,7 @@ public class Enemy extends Human {
 	private boolean isMiss = false;
 	private int hitAngle = 0;
 	private int missAngle = 0;
+	private boolean isVisible = false;
 
 	public void setMissAngle(int missAngle) {
 		this.missAngle = missAngle;
@@ -72,7 +73,14 @@ public class Enemy extends Human {
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
-		return !isDestroy();
+		if (!isDestroy())
+			return isVisible;
+		else
+			return !isDestroy();
+	}
+
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
 	}
 
 	@Override
@@ -91,24 +99,17 @@ public class Enemy extends Human {
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
-		List<Integer> detectCheck = look.detectZone(30, angle);
-		Iterator<Integer> iter = detectCheck.iterator();
+		if (look.detectZone()) {
 
-		while (iter.hasNext()) {
-			Integer d = iter.next();
+			weapon.attack();
+			if (!look.checkLooking(angle)) {
+				isMiss = true;
 
-			if (d == 1 || d == 2) {
-				weapon.attack();
-				if (look.checkLooking(angle) != 1 && look.checkLooking(angle) != 2) {
-					isMiss = true;
-
-				} else {
-					isMiss = false;
-					missAngle = 0;
-				}
-				return;
+			} else {
+				isMiss = false;
+				missAngle = 0;
 			}
-
+			return;
 		}
 
 	}
@@ -118,7 +119,7 @@ public class Enemy extends Human {
 		// TODO Auto-generated method stub
 		attack();
 		move();
-		look.update();
+		
 
 	}
 

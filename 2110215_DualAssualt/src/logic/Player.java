@@ -118,38 +118,43 @@ public class Player extends Human {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		int tempX = x;
-		int tempY = y;
+		int nextX = x;
+		int nextY = y;
+		int nextAngle=angle;
 		if (InputUtility.getKeyPressed(button[0])) {
 
-			y -= speed;
+			nextY -= speed;
 		}
 		if (InputUtility.getKeyPressed(button[1])) {
-			x -= speed;
+			nextX -= speed;
 		}
 		if (InputUtility.getKeyPressed(button[2])) {
-			y += speed;
+			nextY += speed;
 		}
 		if (InputUtility.getKeyPressed(button[3])) {
-			x += speed;
+			nextX += speed;
 		}
 		if (InputUtility.getKeyPressed(button[4])) {
-			angle -= 7;
-			if (angle < 0)
-				angle = 360;
+			nextAngle -= 7;
+			if (nextAngle < 0)
+				nextAngle = 360;
 		} else if (InputUtility.getKeyPressed(button[6])) {
-			angle += 7;
-			if (angle > 360)
-				angle = 0;
+			nextAngle += 7;
+			if (nextAngle > 360)
+				nextAngle = 0;
 		}
-
-		try {
-			GameLogic.map.UpdateMovingEntity(this, x, y);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			x = tempX;
-			y = tempY;
+		boolean cantMove=false;
+		for (Entity e : GameLogic.map.getEntities()) {
+			if (isOverlap(e)) {
+				cantMove=true;
+				break;
+			}
 		}
-		look.update();
+		if(!(cantMove||GameLogic.map.outOfField(x, y))){
+			x=nextX;
+			y=nextY;
+			angle=nextAngle;
+		}
 
 	}
 

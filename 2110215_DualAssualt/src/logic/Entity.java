@@ -52,5 +52,14 @@ public abstract class Entity {
 	}
 	
 	public abstract void update();
+	public boolean isOverlap(Entity e){
+		if(e !=this)
+		if(Math.abs(this.x-e.getX())<=this.height+e.getHeight()){
+			if(Math.abs(this.y-e.getY())<=this.height+e.getHeight()){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

@@ -30,28 +30,18 @@ public class Bullet extends Weapon implements IRenderable {
 		if (!isDestroy()) {
 			x = (x + speed * Math.cos(Math.toRadians(angle)));
 			y = (y + speed * Math.sin(Math.toRadians(angle)));
-
+			if(GameLogic.map.outOfField((int)x,(int) y))
+				isDestroy=true;
 		}
 	}
 
 	public boolean isHit() {
 		// TODO Auto-generated method stub
-		boolean somethingInMap = false;
-		int hitID = 0;
-		for (int h = 0; h < 6; h++) {
-			for (int w = 0; w < 6; w++) {
-				if (GameLogic.map.getTerrainAt((int) x + w, (int) y + h) > 0
-						&& GameLogic.map.getTerrainAt((int) x + w, (int) y + h) != shooter.getID()) {
-					somethingInMap = true;
-					hitID = GameLogic.map.getTerrainAt((int) x + w, (int) y + h);
-					
-					break;
-				}
-			}
-		}
-		if ((!this.isDestroy()) && somethingInMap)
+		
+		
+		if (!this.isDestroy() )
 			for (Entity e : GameLogic.map.getEntities()) {
-				if (e.getID() == hitID) {
+				if (isOverlap(e)) {
 
 					this.isDestroy = true;
 					if (e instanceof Human) {
