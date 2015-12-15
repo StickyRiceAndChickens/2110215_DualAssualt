@@ -39,6 +39,7 @@ public class Enemy extends Human {
 	public boolean getHit() {
 		if (prevLife > life) {
 			prevLife = life;
+			
 			return true;
 		} else
 			return false;

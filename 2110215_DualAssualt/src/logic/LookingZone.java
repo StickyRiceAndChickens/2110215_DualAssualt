@@ -30,11 +30,12 @@ public class LookingZone extends Entity {
 		while (!GameLogic.map.outOfField((int)xi,(int) yi)) {
 			xi += Math.cos(Math.toRadians(angle));
 			yi += Math.sin(Math.toRadians(angle));
+			
 			for (Entity e : GameLogic.map.getEntities())
-				if (e != this)
-					if (Math.abs((int) xi - e.getX()) <=  xi+x+e.getHeight()) {
-						if (Math.abs((int) yi - e.getY()) <= yi+y+e.getHeight()) {
-							if(e instanceof Player)
+				if(e instanceof Player)
+					if (Math.abs((int) xi - e.getX()) <= e.getWidth()/2) {
+						if (Math.abs((int) yi - e.getY()) <= e.getHeight()/2) {
+							
 							return true;
 						}
 					}
@@ -54,12 +55,7 @@ public class LookingZone extends Entity {
 						return true;
 					}
 				}
-				else if(human instanceof Player){
-					if(e instanceof Enemy){
-						((Enemy) e).setVisible(true);
-
-					}
-				}
+				
 			}
 		}
 		return false;

@@ -15,7 +15,7 @@ public class Player extends Human {
 	private int[] button;
 	private BufferedImage image;
 	private int speed = 3;
-	//private LookingZone look;
+	// private LookingZone look;
 
 	public Player(int life, int x, int y, int width, int height, int angle, Weapon weapon, String name, int playerID,
 			BufferedImage image) {
@@ -27,7 +27,7 @@ public class Player extends Human {
 		defualtButton(playerID);
 		if (image != null)
 			this.image = DrawingUtility.resizeImage(image, image.getType(), width, height);
-		//look = new LookingZone(this);
+		// look = new LookingZone(this);
 	}
 
 	public String getName() {
@@ -121,7 +121,7 @@ public class Player extends Human {
 		int nextX = x;
 		int nextY = y;
 		int nextAngle = angle;
-		
+
 		if (InputUtility.getKeyPressed(button[0])) {
 
 			nextY -= speed;
@@ -146,13 +146,20 @@ public class Player extends Human {
 		}
 		boolean cantMove = false;
 		for (Entity e : GameLogic.map.getEntities()) {
-			
-				if (isOverlap(e)) {
-					cantMove = true;
-					break;
+			if (e instanceof Human || e instanceof MapObject)
+				if(e!=this)
+				if (Math.abs(nextX - e.getX()) <= this.width / 2 + e.getWidth() / 2) {
+					if (Math.abs(nextY - e.getY()) <= this.height / 2 + e.getHeight() / 2) {
+						cantMove = true;
+						break;
+					}
+
 				}
+			{
+
+			}
 		}
-		if (!( GameLogic.map.outOfField(nextX, nextY))) {
+		if (!cantMove && !(GameLogic.map.outOfField(nextX, nextY))) {
 			x = nextX;
 			y = nextY;
 			angle = nextAngle;
@@ -165,7 +172,7 @@ public class Player extends Human {
 		// TODO Auto-generated method stub
 		move();
 		attack();
-		
+
 	}
 
 	@Override
