@@ -31,13 +31,13 @@ public class AudioUtility {
 
 	static {
 		/* install where to load sound */
-		menuSong = getAudio("res/sound/Main_Menu.mp3");
-		gunShot = getAudio("res/sound/Pistol_Shot.mp3");
-		gameSong=getAudio("res/sound/gameSoundtack.mp3");
-		reload=getAudio("res/sound/Reloading.mp3");
-		killSound=getAudio("res/sound/Kill Bonus DM .mp3");
-		winSound=getAudio("res/sound/CS_Win.mp3");
-		enemy_winSound=getAudio("res/sound/Terrorists_win.mp3");
+		menuSong = getAudio("res/sound/Main_Menu.wav");
+		gunShot = getAudio("res/sound/shoot.wav");
+		gameSong=getAudio("res/sound/gameSoundtack.wav");
+		reload=getAudio("res/sound/Reloading.wav");
+		killSound=getAudio("res/sound/Kill_Bonus_DM_.wav");
+		winSound=getAudio("res/sound/CS_Win.wav");
+		enemy_winSound=getAudio("res/sound/Terrorists_win.wav");
 
 	}
 
@@ -69,6 +69,6 @@ public class AudioUtility {
 			break;
 			
 		}
-		System.out.println(identifier);
+		
 	}
 }

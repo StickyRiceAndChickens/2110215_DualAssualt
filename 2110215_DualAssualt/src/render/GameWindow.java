@@ -3,6 +3,7 @@ package render;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class GameWindow extends JFrame{
 
 	private JPanel currentScene;

@@ -4,25 +4,22 @@ package render;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class SettingScreen extends JPanel {
 
-	public static int screenWidth = 1280;
-	public static int screenHeight = 720;
-	public static String resolution[] = { "1280x720", "1366x768" };
+	public static int screenWidth = 1366;
+	public static int screenHeight = 768;
+	public static String resolution[] = { "1366x768","1280x720" };
 
 	public SettingScreen() {
 		this.setPreferredSize(new Dimension(SettingScreen.screenWidth, SettingScreen.screenHeight));
@@ -59,11 +56,11 @@ public class SettingScreen extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (res.getSelectedIndex() == 1) {
+				if (res.getSelectedIndex() == 0) {
 					screenWidth = 1366;
 					screenHeight = 768;
 
-				} else if (res.getSelectedIndex() == 0) {
+				} else if (res.getSelectedIndex() == 1) {
 					screenWidth = 1280;
 					screenHeight = 720;
 				}

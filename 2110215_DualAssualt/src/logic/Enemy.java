@@ -3,10 +3,6 @@ package logic;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import render.DrawingUtility;
 
 public class Enemy extends Human {
@@ -16,11 +12,9 @@ public class Enemy extends Human {
 	private BufferedImage image;
 	private boolean isMiss = false;
 	private int hitAngle = 0;
-	private int missAngle = 0;
-	private boolean isVisible = false;
+	
 
 	public void setMissAngle(int missAngle) {
-		this.missAngle = missAngle;
 	}
 
 	public void setHitAngle(int hitAngle) {
@@ -77,9 +71,7 @@ public class Enemy extends Human {
 		return !isDestroy();
 	}
 
-	public void setVisible(boolean isVisible) {
-		this.isVisible = isVisible;
-	}
+	
 
 	@Override
 	public void move() {
@@ -105,7 +97,6 @@ public class Enemy extends Human {
 
 			} else {
 				isMiss = false;
-				missAngle = 0;
 			}
 			return;
 		}

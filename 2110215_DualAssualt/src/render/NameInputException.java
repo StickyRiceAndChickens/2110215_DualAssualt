@@ -1,5 +1,6 @@
 package render;
 
+@SuppressWarnings("serial")
 public class NameInputException extends Exception {
 	private int errorType;
 	private int id;

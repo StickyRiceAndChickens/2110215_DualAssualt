@@ -1,11 +1,5 @@
 package logic;
 
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import render.IRenderable;
 import render.SettingScreen;
 
 public class LookingZone extends Entity {

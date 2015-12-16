@@ -2,9 +2,7 @@ package logic;
 
 import java.awt.image.BufferedImage;
 import render.DrawingUtility;
-import render.GameManager;
 import render.RenderableHolder;
-import render.SettingScreen;
 
 public class Level {
 	private Enemy e1;

@@ -16,10 +16,8 @@ import javax.swing.JPanel;
 
 
 
+@SuppressWarnings("serial")
 public class GameScreen extends JPanel {
-
-	private RenderableHolder renderableHolder;
-	
 
 	protected GameScreen() {
 		

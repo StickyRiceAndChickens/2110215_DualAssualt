@@ -1,24 +1,18 @@
 package logic;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import javax.swing.JOptionPane;
 
 import render.AudioUtility;
 import render.DrawingUtility;
 import render.GameBackground;
 import render.GameManager;
-import render.GameScreen;
-import render.GameWindow;
 import render.IRenderable;
 import render.InputUtility;
 import render.RenderableHolder;
-import render.SettingScreen;
 
 public class GameLogic {
 
@@ -29,7 +23,6 @@ public class GameLogic {
 	private Gun gun1, gun2;
 	public static Map map;
 	public static int g1, g2;
-	
 
 	private boolean readyToRender = false; // For dealing with synchronization
 
@@ -93,20 +86,15 @@ public class GameLogic {
 
 		// Paused
 
-		if (InputUtility.getKeyTriggered(KeyEvent.VK_ESCAPE)) {
-			if (!map.isPause())
-				map.setPause(true);
-			else {
-				map.setPause(false);
-			}
-		}
+		
 		map.update();
+
 		InputUtility.postUpdate();
-		if (map.isGameOver()){
-			JOptionPane.showMessageDialog(GameManager.gameScreen,"Your score is "+map.getScore());
+		if (map.isGameOver()) {
+			JOptionPane.showMessageDialog(GameManager.gameScreen, "Your score is " + map.getScore());
 			AudioUtility.gameSong.stop();
 			GameManager.goToTitle();
-			
+
 		}
 
 		List<IRenderable> holder = RenderableHolder.getInstance().getRenderableList();

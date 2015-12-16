@@ -1,13 +1,9 @@
 package render;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JPanel;
 
 import logic.GameLogic;
-import logic.Player;
 
 public class GameManager {
 
@@ -26,9 +22,9 @@ public class GameManager {
 		playerMenuScreen = new PlayerMenuScreen();
 
 		gameScreen = new GameScreen();
-
+		AudioUtility.menuSong.loop();
 		gameWindow = new GameWindow(titleScene);
-		
+
 		settingScreen = new SettingScreen();
 
 		while (true) {
@@ -48,8 +44,10 @@ public class GameManager {
 			}
 			if (nextScene != null) {
 
-				if (gameWindow.getCurrentScene() instanceof GameScreen)
+				if (gameWindow.getCurrentScene() instanceof GameScreen) {
 					gameLogic.onExit();
+					AudioUtility.menuSong.loop();
+				}
 				gameWindow.switchScene(nextScene);
 				if (nextScene instanceof GameScreen) {
 					AudioUtility.menuSong.stop();
@@ -63,6 +61,7 @@ public class GameManager {
 
 	public static void goToTitle() {
 		nextScene = titleScene;
+
 	}
 
 	public static void newGame() {

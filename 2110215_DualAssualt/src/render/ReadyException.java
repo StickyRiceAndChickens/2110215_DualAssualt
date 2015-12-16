@@ -1,5 +1,6 @@
 package render;
 
+@SuppressWarnings("serial")
 public class ReadyException extends Exception {
 	private int id;
 	

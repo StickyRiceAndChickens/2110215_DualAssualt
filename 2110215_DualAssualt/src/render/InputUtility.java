@@ -1,7 +1,5 @@
 package render;
 
-import java.awt.event.KeyEvent;
-
 public class InputUtility {
 
 	private static int mouseX, mouseY;

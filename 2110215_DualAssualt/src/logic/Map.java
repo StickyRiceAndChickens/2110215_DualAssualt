@@ -1,15 +1,9 @@
 package logic;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import render.AudioUtility;
-import render.GameManager;
-import render.InputUtility;
 import render.SettingScreen;
 
 public class Map {
@@ -107,5 +101,7 @@ public class Map {
 		else
 			return false;
 	}
+
+	
 
 }

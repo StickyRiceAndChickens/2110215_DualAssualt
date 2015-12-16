@@ -1,10 +1,6 @@
 package logic;
 
-import java.awt.List;
-import java.util.ArrayList;
-
 import render.AudioUtility;
-import render.InputUtility;
 import render.RenderableHolder;
 
 public class Gun extends Weapon {
