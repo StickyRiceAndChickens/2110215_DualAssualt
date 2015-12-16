@@ -29,7 +29,8 @@ public class DrawingUtility {
 	public static BufferedImage enemy1 = getImage("res/img/bot1.png");
 	public static BufferedImage enemy2 = getImage("res/img/bot2.png");
 	public static BufferedImage enemy3 = getImage("res/img/bot3.png");
-	public static BufferedImage playerProfile = getImage("res/img/profile1.jpg");
+	public static BufferedImage playerProfile[] = { getImage("res/img/profile1.png"), getImage("res/img/profile2.png"),
+			getImage("res/img/profile3.png"), getImage("res/img/profile4.png"), getImage("res/img/profile5.png") };
 	public static BufferedImage bg = getImage("res/img/bgGrass.jpg");
 	public static BufferedImage newGame = DrawingUtility.getImage("res/img/buttonNewGame.png");
 	public static BufferedImage newGame2 = DrawingUtility.getImage("res/img/buttonNewGameMouseOn.png");

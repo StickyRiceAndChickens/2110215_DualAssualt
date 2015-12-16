@@ -60,13 +60,13 @@ public class PlayerMenuScreen extends JPanel {
 					p1Name = JOptionPane.showInputDialog(PlayerMenuScreen.this, "Enter your p1name");
 					p2Name = JOptionPane.showInputDialog(PlayerMenuScreen.this, "Enter your p2name");
 					onNewGame();
-					GameManager.p1.setImage(DrawingUtility.characterIngame[p1Select]);
-
-					GameManager.p2.setImage(DrawingUtility.characterIngame[p2Select]);
+					
+					GameLogic.p1=new Player(50, 700, 400, 70, 40, 0, null, p1Name, 1, DrawingUtility.characterIngame[p1Select]);
+					GameLogic.p2=new Player(50, 700, 400, 70, 40, 0, null, p2Name, 2, DrawingUtility.characterIngame[p2Select]);
+					
 					GameLogic.g1=g1Select;
 					GameLogic.g2=g2Select;
-					GameManager.p1.setName(p1Name);
-					GameManager.p2.setName(p2Name);
+					
 					
 					GameManager.newGame();
 				} catch (NameInputException e1) {

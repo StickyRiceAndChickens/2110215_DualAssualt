@@ -7,9 +7,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.swing.JOptionPane;
+
+import render.AudioUtility;
 import render.DrawingUtility;
 import render.GameBackground;
 import render.GameManager;
+import render.GameScreen;
+import render.GameWindow;
 import render.IRenderable;
 import render.InputUtility;
 import render.RenderableHolder;
@@ -19,95 +24,101 @@ public class GameLogic {
 
 	// All renderable objects
 	private GameBackground background;
-	
-	
+	public static Player p1, p2;
+
 	private Gun gun1, gun2;
 	public static Map map;
-	public static int g1,g2;
-
+	public static int g1, g2;
 	
 
-	
-
-	/*
-	 * Reserved z MIN_VALUE : background MAX_VALUE-1 : animation effect
-	 * MAX_VALUE : player's status
-	 */
-	private int idCounter =  3;
-	private int nextObjectCreationDelay;
 	private boolean readyToRender = false; // For dealing with synchronization
-											// issue
+
+	public static Level level;
+
+	public GameLogic() {
+		p1 = new Player(50, 700, 400, 70, 40, 0, null, "Bigfern", 1, DrawingUtility.enemy1);
+		p2 = new Player(50, 300, 400, 70, 40, 0, null, "เกรท", 2, DrawingUtility.enemy2);
+	}
 
 	// Called before enter the game loop
 	public synchronized void onStart() {
 		background = new GameBackground();
-		map=new Map();
-		//set Player 1
-		gun1 = new Gun(800, 200, 0, GameManager.p1, g1);
-		GameManager.p1.setWeapon(gun1);
-		map.addEntity(GameManager.p1);
-		RenderableHolder.getInstance().add(GameManager.p1);
+		map = new Map();
+		// set Player 1
+
+		gun1 = new Gun(800, 200, 0, p1, g1);
+		p1.setLife(50);
+		p1.setWeapon(gun1);
+		map.addEntity(p1);
+		RenderableHolder.getInstance().add(p1);
 		map.addEntity(gun1);
-		//set Player 2
-		gun2 = new Gun(700, 400, 0, GameManager.p2, g2);
-		GameManager.p2.setWeapon(gun2);
-		map.addEntity(GameManager.p2);
-		RenderableHolder.getInstance().add(GameManager.p2);
+		// set Player 2
+		gun2 = new Gun(700, 400, 0, p2, g2);
+		p2.setLife(50);
+		p2.setWeapon(gun2);
+		map.addEntity(p2);
+		RenderableHolder.getInstance().add(p2);
 		map.addEntity(gun2);
-		//status bar
-		GameStatusBar status = new GameStatusBar(GameManager.p1, GameManager.p2);
+		// status bar
+		GameStatusBar status = new GameStatusBar(p1, p2);
+		status.setP1(p1);
+		status.setP2(p2);
 		RenderableHolder.getInstance().add(status);
 		RenderableHolder.getInstance().add(background);
-		
-//		e1=new Enemy(30, 500, 200, 70, 40, 180, null, 3,DrawingUtility.playerImage);
-//		gun3 = new Gun(500, 200, 0, e1, 3);
-//		
-//		e1.setWeapon(gun3);
-//		map.addEntity(e1);
-//		map.addEntity(gun3);
-//		RenderableHolder.getInstance().add(e1);
-//		
-//		e2=new Enemy(30, 100, 100, 70, 40, 0, null, 4,DrawingUtility.playerImage);
-//		gun4 = new Gun(100, 100, 0, e2, 3);
-//		
-//		e2.setWeapon(gun4);
-//		map.addEntity(e2);
-//		map.addEntity(gun4);
-//		RenderableHolder.getInstance().add(e2);
-		
-		Level level = new Level();
-		
+
+		level = new Level();
+
 		readyToRender = true;
-	//	System.out.println("Map:");
+
 		background.updateBackground();
-//		for(int h=0;h<SettingScreen.screenHeight/4;h++){
-//			for(int w=0;w<SettingScreen.screenWidth/4;w++){
-//				System.out.print(map.getTerrainAt(w, h));
-//			}
-//			System.out.println();
-//		}
+
 	}
 
 	// Called after exit the game loop
 	public synchronized void onExit() {
 		readyToRender = false;
+		List<IRenderable> holder = RenderableHolder.getInstance().getRenderableList();
+		for (int i = 0; i < holder.size(); i++) {
+			if (holder.get(i) instanceof Entity || holder.get(i) instanceof GameStatusBar) {
+
+				holder.remove(i);
+				i--;
+
+			}
+		}
 
 	}
 
 	public void logicUpdate() {
 
 		// Paused
-		if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
+
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_ESCAPE)) {
+			if (!map.isPause())
+				map.setPause(true);
+			else {
+				map.setPause(false);
+			}
+		}
+		map.update();
+		InputUtility.postUpdate();
+		if (map.isGameOver()){
+			JOptionPane.showMessageDialog(GameManager.gameScreen,"Your score is "+map.getScore());
+			AudioUtility.gameSong.stop();
+			GameManager.goToTitle();
 			
-			System.out.println("Enter");
 		}
 
-		// Update moving background
-		
-		map.update();
-		
-		InputUtility.postUpdate();
-		
+		List<IRenderable> holder = RenderableHolder.getInstance().getRenderableList();
+		for (int i = 0; i < holder.size(); i++) {
+			if (holder.get(i) instanceof Entity) {
+				if (((Entity) holder.get(i)).isDestroy()) {
+					holder.remove(i);
+					i--;
+				}
+
+			}
+		}
 
 	}
 

@@ -14,24 +14,21 @@ public class GameManager {
 	private static final int REFRESH_DELAY = 10;
 
 	private static GameTitle titleScene;
-	private static GameScreen gameScreen;
+	public static GameScreen gameScreen;
 	private static GameWindow gameWindow;
-	private static PlayerMenuScreen playerMenuScreen;
+	public static PlayerMenuScreen playerMenuScreen;
 	private static SettingScreen settingScreen;
 	private static JPanel nextScene = null;
-
-	public static Player p1, p2;
 
 	public static void runGame(GameLogic gameLogic) {
 		titleScene = new GameTitle();
 
-		p1 = new Player(50, 700, 400, 70, 40, 0, null, "Bigfer", 1, DrawingUtility.enemy1);
-		p2 = new Player(50, 300, 400, 70, 40, 0, null, "เกรท", 2, DrawingUtility.enemy2);
 		playerMenuScreen = new PlayerMenuScreen();
 
 		gameScreen = new GameScreen();
 
 		gameWindow = new GameWindow(titleScene);
+		
 		settingScreen = new SettingScreen();
 
 		while (true) {
@@ -43,19 +40,22 @@ public class GameManager {
 			gameWindow.getCurrentScene().repaint();
 			if (gameWindow.getCurrentScene() instanceof GameScreen) {
 				gameLogic.logicUpdate();
-				InputUtility.postUpdate();
+
 			}
 			if (gameWindow.getCurrentScene() instanceof PlayerMenuScreen) {
 				playerMenuScreen.update();
 				InputUtility.postUpdate();
 			}
 			if (nextScene != null) {
-				
+
 				if (gameWindow.getCurrentScene() instanceof GameScreen)
 					gameLogic.onExit();
 				gameWindow.switchScene(nextScene);
-				if (nextScene instanceof GameScreen)
+				if (nextScene instanceof GameScreen) {
+					AudioUtility.menuSong.stop();
 					gameLogic.onStart();
+					AudioUtility.playSound("game");
+				}
 				nextScene = null;
 			}
 		}

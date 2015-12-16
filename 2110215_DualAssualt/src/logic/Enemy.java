@@ -35,7 +35,7 @@ public class Enemy extends Human {
 		this.image = DrawingUtility.resizeImage(image, image.getType(), width, height);
 		;
 	}
-	
+
 	public boolean getHit() {
 		if (prevLife > life) {
 			prevLife = life;
@@ -73,8 +73,8 @@ public class Enemy extends Human {
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
-		
-			return !isDestroy();
+
+		return !isDestroy();
 	}
 
 	public void setVisible(boolean isVisible) {
@@ -117,7 +117,6 @@ public class Enemy extends Human {
 		// TODO Auto-generated method stub
 		attack();
 		move();
-		
 
 	}
 

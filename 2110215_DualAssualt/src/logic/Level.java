@@ -1,8 +1,6 @@
 package logic;
 
 import java.awt.image.BufferedImage;
-import java.util.Set;
-
 import render.DrawingUtility;
 import render.GameManager;
 import render.RenderableHolder;
@@ -19,10 +17,24 @@ public class Level {
 			DrawingUtility.enemy2, DrawingUtility.enemy2, DrawingUtility.enemy2, DrawingUtility.enemy2,
 			DrawingUtility.enemy3 };
 	private MapObject wall;
+	private int[] angle= {0,330,340,270,0,290,70,120,130,100,300,330};
 
+	public int getEnemyCount() {
+		return enemyCount;
+	}
+
+	public void setEnemyCount(int enemyCount) {
+		this.enemyCount = enemyCount;
+	}
+	public void decreaseEnemyCount() {
+		// TODO Auto-generated method stub
+		this.enemyCount--;
+		if(enemyCount<=0)
+			this.enemyCount=0;
+	}
 	public Level() {
 		while (enemyCount < 12) {
-			e1 = new Enemy(30, x[enemyCount], y[enemyCount], 70, 40, 180, null, 3 + enemyCount, imageChar[enemyCount]);
+			e1 = new Enemy(30, x[enemyCount], y[enemyCount], 70, 40, angle[enemyCount], null, 3 + enemyCount, imageChar[enemyCount]);
 			gun1 = new Gun(x[enemyCount], y[enemyCount], 0, e1, 3);
 			e1.setWeapon(gun1);
 			RenderableHolder.getInstance().add(e1);
@@ -71,9 +83,11 @@ public class Level {
 		RenderableHolder.getInstance().add(wall);
 		GameLogic.map.addEntity(wall);
 		
-		GameManager.p1.setX(1100);
-		GameManager.p1.setY(500);
-		GameManager.p2.setX(1200);
-		GameManager.p2.setY(500);
+		GameLogic.p1.setX(1100);
+		GameLogic.p1.setY(500);
+		GameLogic.p2.setX(1200);
+		GameLogic.p2.setY(500);
 	}
+
+	
 }

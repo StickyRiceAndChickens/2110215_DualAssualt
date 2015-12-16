@@ -12,7 +12,7 @@ public class Bullet extends Weapon implements IRenderable {
 	private int power;
 	private int speed;
 
-	private int hitAngle;
+	
 
 	public Bullet(int x, int y, int angle, int power, int speed, Human shooter) {
 		super(x, y, 6, 6, angle);
@@ -46,8 +46,12 @@ public class Bullet extends Weapon implements IRenderable {
 								this.isDestroy = true;
 								if (e instanceof Human) {
 									((Human) e).deceaseLife(power);
-									if (e instanceof Enemy)
+									if (e instanceof Enemy){
 										((Enemy) e).setHitAngle(angle);
+										GameLogic.map.addScore(power*10);
+										}else if(e instanceof Player){
+											GameLogic.map.addScore(-power);
+										}
 									return true;
 								}
 							}

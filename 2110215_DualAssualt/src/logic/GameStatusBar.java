@@ -7,17 +7,29 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 import render.DrawingUtility;
+import render.GameManager;
 import render.IRenderable;
+import render.PlayerMenuScreen;
 import render.SettingScreen;
 
 public class GameStatusBar implements IRenderable {
+	
 	private Player p1, p2;
+	
 
 	public GameStatusBar(Player p1, Player p2) {
 
 		this.p1 = p1;
 		this.p2 = p2;
+		
+	}
 
+	public void setP1(Player p1) {
+		this.p1 = p1;
+	}
+
+	public void setP2(Player p2) {
+		this.p2 = p2;
 	}
 
 	@Override
@@ -38,11 +50,11 @@ public class GameStatusBar implements IRenderable {
 		g2d.drawString(p1.getName(), 10, SettingScreen.screenHeight - 10);
 		g2d.drawString(p2.getName(), SettingScreen.screenWidth-110, SettingScreen.screenHeight - 10);
 		
-		g2d.drawImage(DrawingUtility.playerProfile, null, 10,
-				(SettingScreen.screenHeight - (SettingScreen.screenHeight / 5)) + 30);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.playerProfile[GameManager.playerMenuScreen.getP1Select()],2,SettingScreen.screenHeight / 7,SettingScreen.screenHeight / 7), null, 10,
+				(SettingScreen.screenHeight - (SettingScreen.screenHeight / 5))+6 );
 		
-		g2d.drawImage(DrawingUtility.playerProfile, null, SettingScreen.screenWidth-110,
-				(SettingScreen.screenHeight - (SettingScreen.screenHeight / 5)) + 30);
+		g2d.drawImage(DrawingUtility.resizeImage(DrawingUtility.playerProfile[GameManager.playerMenuScreen.getP2Select()], 2,SettingScreen.screenHeight / 7,SettingScreen.screenHeight / 7), null, SettingScreen.screenWidth-110,
+				(SettingScreen.screenHeight - (SettingScreen.screenHeight / 5))+6 );
 		
 		Color lifeColor1 = new Color(68, 255, 0);
 		if (p1.getLife() < 15) {
@@ -81,6 +93,9 @@ public class GameStatusBar implements IRenderable {
 		g2d.drawString(gun2.getStatus(), SettingScreen.screenWidth-310, SettingScreen.screenHeight - 40);
 		g2d.drawString(Integer.toString(gun2.getMagazine()) + "/" + Integer.toString(gun2.getAmmo()), SettingScreen.screenWidth-310,
 				SettingScreen.screenHeight - 10);
+		g2d.setColor(Color.pink);
+		g2d.setFont(new Font("Tahoma", Font.ITALIC+Font.BOLD, 50));
+		g2d.drawString("SCORE : "+GameLogic.map.getScore(),SettingScreen.screenWidth/3,SettingScreen.screenHeight-10);
 		
 	}
 

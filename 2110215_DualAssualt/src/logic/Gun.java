@@ -3,6 +3,7 @@ package logic;
 import java.awt.List;
 import java.util.ArrayList;
 
+import render.AudioUtility;
 import render.InputUtility;
 import render.RenderableHolder;
 
@@ -22,12 +23,12 @@ public class Gun extends Weapon {
 	private boolean isShoot = false;
 
 	public Gun(int x, int y, int angle, Human shooter, int gunType) {
-		super(x, y, 0,0, angle);
+		super(x, y, 0, 0, angle);
 		// TODO Auto-generated constructor stub
 		this.gunType = gunType;
 		switch (gunType) {
 		case 0:
-			//shotgun
+			// shotgun
 			this.fireRateDelay = 5;
 			this.magazine = 8;
 			this.ammo = 300;
@@ -35,7 +36,7 @@ public class Gun extends Weapon {
 			this.reloadingTime = 50;
 			break;
 		case 1:
-			//rifle
+			// rifle
 			this.fireRateDelay = 3;
 			this.magazine = 20;
 			this.ammo = 520;
@@ -43,11 +44,11 @@ public class Gun extends Weapon {
 			this.reloadingTime = 30;
 			break;
 		case 3:
-			this.fireRateDelay=20;
-			this.magazine=8;
-			this.power=3;
-			this.ammo=5000;
-			this.reloadingTime=30;
+			this.fireRateDelay = 20;
+			this.magazine = 8;
+			this.power = 3;
+			this.ammo = 5000;
+			this.reloadingTime = 30;
 		}
 
 		this.shooter = shooter;
@@ -113,7 +114,7 @@ public class Gun extends Weapon {
 			magazine += ammo;
 
 		}
-
+		AudioUtility.playSound("reload");
 		return;
 
 	}
@@ -183,9 +184,10 @@ public class Gun extends Weapon {
 		Bullet bullet = new Bullet(x, y, angle, power, 30, shooter);
 		GameLogic.map.addEntity(bullet);
 		RenderableHolder.getInstance().add(bullet);
+		AudioUtility.playSound("shot");
 
 	}
-	
+
 	public int getGunType() {
 		return gunType;
 	}

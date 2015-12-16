@@ -27,7 +27,7 @@ public class Player extends Human {
 		defualtButton(playerID);
 		if (image != null)
 			this.image = DrawingUtility.resizeImage(image, image.getType(), width, height);
-		// look = new LookingZone(this);
+		
 	}
 
 	public String getName() {
@@ -136,11 +136,11 @@ public class Player extends Human {
 			nextX += speed;
 		}
 		if (InputUtility.getKeyPressed(button[4])) {
-			nextAngle -= 7;
+			nextAngle -= 3;
 			if (nextAngle < 0)
 				nextAngle = 360;
 		} else if (InputUtility.getKeyPressed(button[6])) {
-			nextAngle += 7;
+			nextAngle += 3;
 			if (nextAngle > 360)
 				nextAngle = 0;
 		}
