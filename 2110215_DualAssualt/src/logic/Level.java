@@ -47,7 +47,7 @@ public class Level {
 		RenderableHolder.getInstance().add(wall);
 		GameLogic.map.addEntity(wall);
 		
-		wall = new MapObject(SettingScreen.screenWidth/2, 50, 1120, 20);
+		wall = new MapObject(640, 50, 1130, 20);
 		RenderableHolder.getInstance().add(wall);
 		GameLogic.map.addEntity(wall);
 		
